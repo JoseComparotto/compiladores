@@ -1,2 +1,2 @@
 # Compiladores
-Trabalho para a diciplina de compiladores.
+Trabalho para a disciplina de compiladores.
