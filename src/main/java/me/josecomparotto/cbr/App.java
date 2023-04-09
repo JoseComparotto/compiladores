@@ -21,28 +21,5 @@ public final class App {
      */
     public static void main(String[] args) {
         
-        final String TEST_INPUT_FILE = "exemples/exemple1.cbr";
-        final String TEST_OUTPUT_FILE = "exemples/exemple1-tokens.xml";
-
-        try {
-
-            final InputStream in = new FileInputStream(args.length > 0 ? args[0] : TEST_INPUT_FILE);
-            final PrintStream out = new PrintStream(new FileOutputStream(TEST_OUTPUT_FILE));
-
-            LexicalScanner scanner = new LexicalScanner(in);
-
-            out.println("<tokens>");
-            for (Token t : scanner) {
-                out.println("\t" + t.toString());
-            }
-            out.println("</tokens>");
-
-            in.close();
-            out.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 }
