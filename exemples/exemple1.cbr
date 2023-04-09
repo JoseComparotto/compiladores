@@ -1,0 +1,15 @@
+inteiro x;
+inteiro y;
+inteiro i;
+
+leia(x);
+
+y = x * 2;
+
+para i de 0 ate y passo 1 {
+
+    se ( i > 10 ){
+        escreva("%d passou de 10", i);
+    }
+
+}

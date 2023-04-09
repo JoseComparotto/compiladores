@@ -79,6 +79,9 @@ Expressão Regular: `/[a-z0-9\_\=\+\-\*\/\>\<\!\.\(\)\{\}\;\"\n ]/g`
 * `logico`
 * `verdadeiro`
 * `falso`
+* `e`
+* `ou`
+* `nao`
 * `=`
 * `+`
 * `-`
@@ -90,9 +93,6 @@ Expressão Regular: `/[a-z0-9\_\=\+\-\*\/\>\<\!\.\(\)\{\}\;\"\n ]/g`
 * `<=`
 * `==`
 * `!=`
-* `e`
-* `ou`
-* `nao`
 * `(`
 * `)`
 * `{`
@@ -125,7 +125,6 @@ EBNF: `<alpha> ::= <nondigit> | <digit>`
 
 RegExp: `/[_a-z0-9]/`
 
-
 #### Literais `<literal>`
 
 EBNF: `<const> ::= <text-literal> | <integer-literal> | <float-literal> | <bool-literal> `
@@ -151,7 +150,6 @@ RegExp: `/[_a-z]/`
 ##### Texto `<text-literal>`
 
 RegExp: `/"((?:\\(u[0-9a-f]{4}|[0-7]{3}|x[0-9a-f]{2}|[btnfr'"\\]))|[^\"\n\\])*"/i`
-
 
 #### Operadores `<ope>`
 
@@ -180,7 +178,6 @@ RegExp: `/==|!=|<=|>=|<|>/`
 EBNF: `<logic-operator> := nao | e | ou`
 
 RegExp: `/nao|e|ou/`
-
 
 #### Tipos primitivos `<type>`
 
