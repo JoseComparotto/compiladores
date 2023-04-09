@@ -50,8 +50,9 @@ public class LexicalScanner implements Iterable<Token> {
                 String value = m.group();
                 int tokenStart = m.start();
                 int tokenEnd = m.end();
+                String tokenAddress = Helpers.toLineColumnAddress(tokenStart, inputString);
 
-                Token token = new Token(symbol, value, tokenStart, tokenEnd);
+                Token token = new Token(symbol, value, tokenStart, tokenEnd, tokenAddress);
 
                 boolean reject = false;
 
@@ -67,7 +68,7 @@ public class LexicalScanner implements Iterable<Token> {
                         if (token.length > registred.length) {
                             // Remove o token conflitante que é de menor tamanho
                             replacables.add(registred);
-                            i = registred.end-1;
+                            i = registred.end - 1;
                         } else {
                             // Caso contrato, o token atual será rejeitado
                             reject = true;
@@ -103,11 +104,11 @@ public class LexicalScanner implements Iterable<Token> {
         for (int i = 0; i < mask.length; i++) {
             if (mask[i] == null) {
                 lastUnknownIndex = i;
-                
+
             } else if (lastUnknownIndex != -1) {
                 throw new RuntimeException(
                         "Token não identificado: '" + Helpers.escape(inputString.substring(lastUnknownIndex, i))
-                                + "', em #" + lastUnknownIndex);
+                                + "', em #" + lastUnknownIndex + " " + Helpers.toLineColumnAddress(lastUnknownIndex, inputString));
             }
         }
 

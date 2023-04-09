@@ -32,7 +32,7 @@ public class Helpers {
             while (unicode.length() < 4)
                 unicode = "0" + unicode;
 
-            s= s.replaceAll("\\u" + unicode, "\\\\u" + unicode);
+            s = s.replaceAll("\\u" + unicode, "\\\\u" + unicode);
         }
 
         return s;
@@ -42,6 +42,26 @@ public class Helpers {
         return new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))
                 .lines()
                 .collect(Collectors.joining("\n"));
+    }
+
+    public static String toLineColumnAddress(int position, String text) {
+
+        int line = 0;
+        int column = 0;
+
+        String[] lines = text.split("\n");
+        
+        int currPosition = 0;
+
+        for (line = 0; line < lines.length;line++) {
+            if(currPosition + lines[line].length()+1 > position){
+                column = position - currPosition;
+                break;
+            }
+            currPosition += lines[line].length()+1;
+        }
+
+        return "linha " + (line+1) + ", coluna " + (column+1);
     }
 
 }
