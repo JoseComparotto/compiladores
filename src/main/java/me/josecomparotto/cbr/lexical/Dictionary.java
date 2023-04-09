@@ -59,30 +59,40 @@ public enum Dictionary {
     BLOCK_CLOSURE("\\}"),
 
     // Literais
-    INTEGER_LITERAL("\\d+", Pattern.CASE_INSENSITIVE), // Literais Inteiros
-    FLOAT_LITERAL("\\d+\\.\\d+", Pattern.CASE_INSENSITIVE), // Literais Reais
-    TEXT_LITERAL("\"(?:(\\\\(u[0-9a-f]{4}|[0-7]{3}|x[0-9a-f]{2}|[abfnrtv'\"?\\\\]))|[^\\\"\\n\\\\])*\"",
-            Pattern.CASE_INSENSITIVE), // Literais de texto https://regexr.com/7a1k7
+    INTEGER_LITERAL("(\\d+)", true), // Literais Inteiros
+    FLOAT_LITERAL("(\\d+\\.\\d+)", true), // Literais Reais
+    TEXT_LITERAL("\"((?:(?:\\\\(?:u[0-9a-f]{4}|[0-7]{3}|x[0-9a-f]{2}|[abfnrtv'\"?\\\\]))|[^\\\"\\n\\\\])*)\"",
+            Pattern.CASE_INSENSITIVE, true), // Literais de texto https://regexr.com/7a1k7
 
     // Identificador
-    IDENTIFIER("[_a-z][_a-z0-9]*"), // Identificador universal
+    IDENTIFIER("([_a-z][_a-z0-9]*)", true), // Identificador universal
 
     // Final do arquivo
     EOF("$");
 
-    private final Pattern pattern;
+    public final Pattern pattern;
+    public final boolean keepValue;
 
-    private Dictionary(Pattern pattern) {
+    private Dictionary(Pattern pattern, boolean keepValue) {
         this.pattern = pattern;
+        this.keepValue = keepValue;
+    }
+
+    private Dictionary(String pattern, int flags, boolean keepValue) {
+        this(Pattern.compile(pattern, flags), keepValue);
+    }
+
+    private Dictionary(String pattern, boolean keepValue) {
+        this(pattern, 0, keepValue);
     }
 
     private Dictionary(String pattern, int flags) {
-        this(Pattern.compile(pattern, flags));
+        this(pattern, flags, false);
+    }
+    private Dictionary(String pattern) {
+        this(pattern, 0, false);
     }
 
-    private Dictionary(String pattern) {
-        this(pattern, 0);
-    }
 
     public Matcher matcher(CharSequence input) {
         return this.pattern.matcher(input);
