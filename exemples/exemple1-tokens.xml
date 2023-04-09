@@ -1,48 +1,48 @@
 <tokens>
-	<token name='KEYWORD_INTEIRO' value='inteiro' start='0' end='7'/>
-	<token name='IDENTIFIER' value='x' start='8' end='9'/>
-	<token name='SEMICOLON' value=';' start='9' end='10'/>
-	<token name='KEYWORD_INTEIRO' value='inteiro' start='11' end='18'/>
-	<token name='IDENTIFIER' value='y' start='19' end='20'/>
-	<token name='SEMICOLON' value=';' start='20' end='21'/>
-	<token name='KEYWORD_INTEIRO' value='inteiro' start='22' end='29'/>
-	<token name='IDENTIFIER' value='i' start='30' end='31'/>
-	<token name='SEMICOLON' value=';' start='31' end='32'/>
-	<token name='KEYWORD_LEIA' value='leia' start='34' end='38'/>
-	<token name='PARENTHESIS_OPENING' value='(' start='38' end='39'/>
-	<token name='IDENTIFIER' value='x' start='39' end='40'/>
-	<token name='PARENTHESIS_CLOSURE' value=')' start='40' end='41'/>
-	<token name='SEMICOLON' value=';' start='41' end='42'/>
-	<token name='IDENTIFIER' value='y' start='44' end='45'/>
-	<token name='ASSIGNMENT_OPERATOR' value='=' start='46' end='47'/>
-	<token name='IDENTIFIER' value='x' start='48' end='49'/>
-	<token name='PRODUCT_OPERATOR' value='*' start='50' end='51'/>
-	<token name='INTEGER_LITERAL' value='2' start='52' end='53'/>
-	<token name='SEMICOLON' value=';' start='53' end='54'/>
-	<token name='KEYWORD_PARA' value='para' start='56' end='60'/>
-	<token name='IDENTIFIER' value='i' start='61' end='62'/>
-	<token name='KEYWORD_DE' value='de' start='63' end='65'/>
-	<token name='INTEGER_LITERAL' value='0' start='66' end='67'/>
-	<token name='KEYWORD_ATE' value='ate' start='68' end='71'/>
-	<token name='IDENTIFIER' value='y' start='72' end='73'/>
-	<token name='KEYWORD_PASSO' value='passo' start='74' end='79'/>
-	<token name='INTEGER_LITERAL' value='1' start='80' end='81'/>
-	<token name='BLOCK_OPENING' value='{' start='82' end='83'/>
-	<token name='KEYWORD_SE' value='se' start='89' end='91'/>
-	<token name='PARENTHESIS_OPENING' value='(' start='92' end='93'/>
-	<token name='IDENTIFIER' value='i' start='94' end='95'/>
-	<token name='GREATER_THEN_OPERATOR' value='>' start='96' end='97'/>
-	<token name='INTEGER_LITERAL' value='10' start='98' end='100'/>
-	<token name='PARENTHESIS_CLOSURE' value=')' start='101' end='102'/>
-	<token name='BLOCK_OPENING' value='{' start='102' end='103'/>
-	<token name='KEYWORD_ESCREVA' value='escreva' start='112' end='119'/>
-	<token name='PARENTHESIS_OPENING' value='(' start='119' end='120'/>
-	<token name='TEXT_LITERAL' value='\"%d passou de 10\"' start='120' end='137'/>
-	<token name='COMMA' value=',' start='137' end='138'/>
-	<token name='IDENTIFIER' value='i' start='139' end='140'/>
-	<token name='PARENTHESIS_CLOSURE' value=')' start='140' end='141'/>
-	<token name='SEMICOLON' value=';' start='141' end='142'/>
-	<token name='BLOCK_CLOSURE' value='}' start='147' end='148'/>
-	<token name='BLOCK_CLOSURE' value='}' start='150' end='151'/>
-	<token name='EOF' value='' start='151' end='151'/>
+	<token name='KEYWORD_INTEIRO' value='inteiro' start='0' end='7' address='linha 1, coluna 1'/>
+	<token name='IDENTIFIER' value='x' start='8' end='9' address='linha 1, coluna 9'/>
+	<token name='SEMICOLON' value=';' start='9' end='10' address='linha 1, coluna 10'/>
+	<token name='KEYWORD_INTEIRO' value='inteiro' start='11' end='18' address='linha 2, coluna 1'/>
+	<token name='IDENTIFIER' value='y' start='19' end='20' address='linha 2, coluna 9'/>
+	<token name='SEMICOLON' value=';' start='20' end='21' address='linha 2, coluna 10'/>
+	<token name='KEYWORD_INTEIRO' value='inteiro' start='22' end='29' address='linha 3, coluna 1'/>
+	<token name='IDENTIFIER' value='i' start='30' end='31' address='linha 3, coluna 9'/>
+	<token name='SEMICOLON' value=';' start='31' end='32' address='linha 3, coluna 10'/>
+	<token name='KEYWORD_LEIA' value='leia' start='34' end='38' address='linha 5, coluna 1'/>
+	<token name='PARENTHESIS_OPENING' value='(' start='38' end='39' address='linha 5, coluna 5'/>
+	<token name='IDENTIFIER' value='x' start='39' end='40' address='linha 5, coluna 6'/>
+	<token name='PARENTHESIS_CLOSURE' value=')' start='40' end='41' address='linha 5, coluna 7'/>
+	<token name='SEMICOLON' value=';' start='41' end='42' address='linha 5, coluna 8'/>
+	<token name='IDENTIFIER' value='y' start='44' end='45' address='linha 7, coluna 1'/>
+	<token name='ASSIGNMENT_OPERATOR' value='=' start='46' end='47' address='linha 7, coluna 3'/>
+	<token name='IDENTIFIER' value='x' start='48' end='49' address='linha 7, coluna 5'/>
+	<token name='PRODUCT_OPERATOR' value='*' start='50' end='51' address='linha 7, coluna 7'/>
+	<token name='INTEGER_LITERAL' value='2' start='52' end='53' address='linha 7, coluna 9'/>
+	<token name='SEMICOLON' value=';' start='53' end='54' address='linha 7, coluna 10'/>
+	<token name='KEYWORD_PARA' value='para' start='56' end='60' address='linha 9, coluna 1'/>
+	<token name='IDENTIFIER' value='i' start='61' end='62' address='linha 9, coluna 6'/>
+	<token name='KEYWORD_DE' value='de' start='63' end='65' address='linha 9, coluna 8'/>
+	<token name='INTEGER_LITERAL' value='0' start='66' end='67' address='linha 9, coluna 11'/>
+	<token name='KEYWORD_ATE' value='ate' start='68' end='71' address='linha 9, coluna 13'/>
+	<token name='IDENTIFIER' value='y' start='72' end='73' address='linha 9, coluna 17'/>
+	<token name='KEYWORD_PASSO' value='passo' start='74' end='79' address='linha 9, coluna 19'/>
+	<token name='INTEGER_LITERAL' value='1' start='80' end='81' address='linha 9, coluna 25'/>
+	<token name='BLOCK_OPENING' value='{' start='82' end='83' address='linha 9, coluna 27'/>
+	<token name='KEYWORD_SE' value='se' start='89' end='91' address='linha 11, coluna 5'/>
+	<token name='PARENTHESIS_OPENING' value='(' start='92' end='93' address='linha 11, coluna 8'/>
+	<token name='IDENTIFIER' value='i' start='94' end='95' address='linha 11, coluna 10'/>
+	<token name='GREATER_THEN_OPERATOR' value='>' start='96' end='97' address='linha 11, coluna 12'/>
+	<token name='INTEGER_LITERAL' value='10' start='98' end='100' address='linha 11, coluna 14'/>
+	<token name='PARENTHESIS_CLOSURE' value=')' start='101' end='102' address='linha 11, coluna 17'/>
+	<token name='BLOCK_OPENING' value='{' start='102' end='103' address='linha 11, coluna 18'/>
+	<token name='KEYWORD_ESCREVA' value='escreva' start='112' end='119' address='linha 12, coluna 9'/>
+	<token name='PARENTHESIS_OPENING' value='(' start='119' end='120' address='linha 12, coluna 16'/>
+	<token name='TEXT_LITERAL' value='\"%d passou de 10\"' start='120' end='137' address='linha 12, coluna 17'/>
+	<token name='COMMA' value=',' start='137' end='138' address='linha 12, coluna 34'/>
+	<token name='IDENTIFIER' value='i' start='139' end='140' address='linha 12, coluna 36'/>
+	<token name='PARENTHESIS_CLOSURE' value=')' start='140' end='141' address='linha 12, coluna 37'/>
+	<token name='SEMICOLON' value=';' start='141' end='142' address='linha 12, coluna 38'/>
+	<token name='BLOCK_CLOSURE' value='}' start='147' end='148' address='linha 13, coluna 5'/>
+	<token name='BLOCK_CLOSURE' value='}' start='150' end='151' address='linha 15, coluna 1'/>
+	<token name='EOF' value='' start='151' end='151' address='linha 15, coluna 2'/>
 </tokens>
