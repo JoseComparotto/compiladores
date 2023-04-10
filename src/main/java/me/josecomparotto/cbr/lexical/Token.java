@@ -22,10 +22,11 @@ public class Token {
 
     @Override
     public String toString() {
-        return "<token name='" + this.symbol.name() + "' value='" + Helpers.escape(this.value)
-                + "' start='"
-                + this.start
-                + "' end='" + this.end + "' address='"+this.address+"'/>";
+        if (this.symbol.keepValue)
+            return "<" + this.symbol.name() + " value='" + Helpers.escape(this.value) + "'/>";
+        else
+            return "<" + this.symbol.name() + "/>";
+
     }
 
 }

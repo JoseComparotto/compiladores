@@ -21,6 +21,10 @@ public class LexicalScanner implements Iterable<Token> {
         this(Helpers.getString(in));
     }
 
+    public Token[] getTokens(){
+        return tokens.toArray(new Token[0]);
+    }
+
     @Override
     public Iterator<Token> iterator() {
         return tokens.iterator();
