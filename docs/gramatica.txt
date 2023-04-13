@@ -41,13 +41,8 @@
 
 (* Estrutura condicional *)
 <conditional-structure> =
-<<<<<<< HEAD
     'moshi', '(' , <value>, ')', <scope-block> |
     'moshi', '(' , <value>, ')', <scope-block>, 'soreigai', <scope-block>;
-=======
-    'moshi', <value>, <scope-block> |
-    'moshi', <value>, <scope-block>, 'soreigai', <scope-block>;
->>>>>>> 26ff94b8e96219be5c201f214c14bfb1adbeb55f
 
 (* Estrutura de repetição "para" *)
 <repeat-structure> =   
