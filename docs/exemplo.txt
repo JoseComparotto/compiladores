@@ -1,0 +1,19 @@
+kaku("Informe um numero natural: ");
+
+yomu(x);
+
+mochi ( x < 0 ) {
+    kaku ("Numero invalido");
+} soreigei{
+
+    resultado := 1;
+    
+    tameni i kara 1 made x ho 1 {
+
+        resultado := resultado * i;
+
+    }
+
+    kaku (x, "! = ", resultado);
+
+}

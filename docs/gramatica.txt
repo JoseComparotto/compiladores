@@ -1,0 +1,131 @@
+(*
+    Observações:
+
+    Gramática definida conforme a espeficicação da notação EBNF (ISO / IEC 14977).
+    Referência: https://pt.m.wikipedia.org/wiki/Formalismo_de_Backus-Naur_Estendido
+
+    As palavras reservadas estão no idioma Japonês.
+
+    A minha linguagem é fracamente tipada.
+*)
+
+<program> = <scope>;
+
+(* Escopos *)
+<scope-block> = '{', <scope>, '}' | <instruction>;
+
+<scope> = { <instruction> };
+
+(* Instruções: Comandos e Estruturas *)
+<instruction> = <command>, ';' | <structure>;
+
+<command> = 
+    <input-command> |
+    <output-command> |
+    <assign-command>;
+
+<structure> =
+    <conditional-structure> |
+    <repeat-structure>;
+
+(* Comando de entrada *)
+<input-command> = 'yomu', '(', <identifier> ,')';
+
+(* Comando de saída. Aceita um, ou vários parâmetros *)
+<output-command> =
+    'kaku', '(', <value> ,')' |
+    'kaku', '(', <value>, {',', <value>}, ')';
+
+(* Comando de atribuição *)
+<assign-command> = <identifier>,':=', <value>;
+
+(* Estrutura condicional *)
+<conditional-structure> =
+    'moshi', '(' , <value>, ')', <scope-block> |
+    'moshi', '(' , <value>, ')', <scope-block>, 'soreigai', <scope-block>;
+
+(* Estrutura de repetição "para" *)
+<repeat-structure> =   
+    'tameni', <identifier>,
+    'kara', <value>,
+    'made', <value>,
+    'ho', <value>,
+    <scope-block> |   
+    'tameni', <identifier>,     
+    'kara', <value>,
+    'made', <value>,
+    <scope-block>;
+
+(* Expressões *)
+<value> = <logic-binary-expression>;
+
+(* Expressões Lógicas *)
+<logic-binary-expression> = 
+    <logic-binary-expression>,
+    <logic-binary-operator>,
+    <logic-unary-expression>
+| 
+    <logic-unary-expression>;
+
+<logic-unary-expression> = 
+    <logic-unary-operator>,
+    <rel-expression>
+| 
+    <rel-expression>;
+
+(* Expressões Relacionais *)
+<rel-expression> = 
+    <aritm-add-binary-expression>,
+    <rel-operator>,
+    <aritm-add-binary-expression>
+| 
+    <aritm-add-binary-expression>;
+
+(* Expressões Aritméticas *)
+<aritm-add-binary-expression> = 
+    <aritm-add-binary-expression>,
+    <aritm-add-operator>,
+    <aritm-multi-binary-expression>
+| 
+    <aritm-multi-binary-expression>;
+
+<aritm-multi-binary-expression> = 
+    <aritm-multi-binary-expression>,
+    <aritm-multi-operator>,
+    <aritm-unary-expression>
+|   
+    <aritm-unary-expression>;
+
+<aritm-unary-expression> =
+    <aritm-add-operator>,
+    <primitive-value>
+|
+    <primitive-value>;
+
+<primitive-value> = <const> | <identifier> | '(', <value>,  ')';
+
+
+(* Identificador de variaveis: *)
+<identifier> = <letter>, { <alpha> };
+
+(* Constantes (literais) *)
+<const> = <text-literal> | <number-literal> | <bool-literal>;
+<number-literal> = { <digit> } | { <digit> }, '.', { <digit> };
+<bool-literal> = 'shin' | 'nise'; 
+<text-literal> = '"', { <any> - '"' }, '"';
+
+(* Operadores *)
+<aritm-add-operator> = '+' | '-';
+<aritm-multi-operator> = '*' | '/';
+<aritm-operator> = <aritm-add-operator> | <aritm-mult-operator>;
+<rel-operator> = '==' | '!=' | '<=' | '>=' | '<' | '>';
+<logic-binary-operator> = 'mo' | 'mata';
+<logic-unary-operator> = 'shinai';
+
+(* Classes de caracteres: *)
+<any> = <alpha> | <special> | <blank>;
+<alpha> = <letter> | <digit>;
+<digit> = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
+<letter> = '_' | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z';
+<special> = '=' | ':' | '+' | '-' | '*' | '/' | '>' | '<' | '!' | '.' | ',' | '(' | ')' | '{' | '}' | ';' | '"';
+<blank> = ' ' | '\n' | '\t';
