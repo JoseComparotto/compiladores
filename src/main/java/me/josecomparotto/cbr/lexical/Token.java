@@ -23,9 +23,9 @@ public class Token {
     @Override
     public String toString() {
         if (this.symbol.keepValue)
-            return "<" + this.symbol.name() + " value='" + Helpers.escape(this.value) + "'/>";
+            return "<" + this.symbol.name() + ", '" + Helpers.escape(this.value) + "'>";
         else
-            return "<" + this.symbol.name() + "/>";
+            return "<" + this.symbol.name() + ">";
 
     }
 

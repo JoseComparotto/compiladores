@@ -57,18 +57,25 @@
     <scope-block>;
 
 (* Expressões *)
-<value> = <logic-binary-expression>;
+<value> = <logic-or-expression>;
 
 (* Expressões Lógicas *)
-<logic-binary-expression> = 
-    <logic-binary-expression>,
-    <logic-binary-operator>,
-    <logic-unary-expression>
+<logic-or-expression> = 
+    <logic-or-expression>,
+    <logic-or-operator>,
+    <logic-and-expression>
 | 
-    <logic-unary-expression>;
+    <logic-and-expression>;
 
-<logic-unary-expression> = 
-    <logic-unary-operator>,
+<logic-and-expression> = 
+    <logic-and-expression>,
+    <logic-and-operator>,
+    <logic-not-expression>
+| 
+    <logic-not-expression>;
+
+<logic-not-expression> = 
+    <logic-not-operator>,
     <rel-expression>
 | 
     <rel-expression>;
@@ -119,8 +126,9 @@
 <aritm-multi-operator> = '*' | '/';
 <aritm-operator> = <aritm-add-operator> | <aritm-mult-operator>;
 <rel-operator> = '==' | '!=' | '<=' | '>=' | '<' | '>';
-<logic-binary-operator> = 'mo' | 'mata';
-<logic-unary-operator> = 'shinai';
+<logic-or-operator> ='mata';
+<logic-and-operator> = 'mo';
+<logic-not-operator> = 'shinai';
 
 (* Classes de caracteres: *)
 <any> = <alpha> | <special> | <blank>;

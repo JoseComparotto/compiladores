@@ -16,23 +16,19 @@ public enum Dictionary {
     COMMA(","),
 
     // Palavras reservadas
-    KEYWORD_ESCREVA("escreva"),
-    KEYWORD_LEIA("leia"),
-    KEYWORD_INTEIRO("inteiro"),
-    KEYWORD_REAL("real"),
-    KEYWORD_TEXTO("texto"),
-    KEYWORD_LOGICO("logico"),
-    KEYWORD_SE("se"),
-    KEYWORD_SENAO("senao"),
-    KEYWORD_PARA("para"),
-    KEYWORD_DE("de"),
-    KEYWORD_ATE("ate"),
-    KEYWORD_PASSO("passo"),
-    KEYWORD_FALSO("falso"),
-    KEYWORD_VERDADEIRO("verdadeiro"),
-    KEYWORD_NAO("nao"),
-    KEYWORD_E("e"),
-    KEYWORD_OU("ou"),
+    KEYWORD_KAKU("kaku"),           // Comando de saída
+    KEYWORD_YOMU("yomu"),           // Comando de entrada
+    KEYWORD_MOSHI("moshi"),         // Estrutura condicional
+    KEYWORD_SOREIGAI("soreigai"),   // Estrutura de negação da condição
+    KEYWORD_TAMENI("tameni"),       // Estrutura de Repetição
+    KEYWORD_KARA("kara"),           // "de"
+    KEYWORD_MADE("made"),           // "até"
+    KEYWORD_HO("ho"),               // "passo" 
+    KEYWORD_NISE("nise"),           // Literal booleana falsa
+    KEYWORD_SHIN("shin"),           // Literal booleana verdadeira
+    KEYWORD_SHINAI("shinai"),       // Operadoe de negação
+    KEYWORD_MO("mo"),               // Operador "e"
+    KEYWORD_MATA("mata"),           // Operador "ou"
 
     // Operadores aritiméticos
     PRODUCT_OPERATOR("\\*"),
@@ -48,7 +44,7 @@ public enum Dictionary {
     LESS_THEN_OPERATOR("<"),
 
     // Operador de atribuição
-    ASSIGNMENT_OPERATOR("="),
+    ASSIGNMENT_OPERATOR(":="),
 
     // Delimitadores de parenteses
     PARENTHESIS_OPENING("\\("),
@@ -59,8 +55,7 @@ public enum Dictionary {
     BLOCK_CLOSURE("\\}"),
 
     // Literais
-    INTEGER_LITERAL("(\\d+)", true), // Literais Inteiros
-    FLOAT_LITERAL("(\\d+\\.\\d+)", true), // Literais Reais
+    NUMBER_LITERAL("\\d+(\\.\\d+)?(e[+-]?\\d+)?", Pattern.CASE_INSENSITIVE, true), // Literais numéricos
     TEXT_LITERAL("\"((?:(?:\\\\(?:u[0-9a-f]{4}|[0-7]{3}|x[0-9a-f]{2}|[abfnrtv'\"?\\\\]))|[^\\\"\\n\\\\])*)\"",
             Pattern.CASE_INSENSITIVE, true), // Literais de texto https://regexr.com/7a1k7
 

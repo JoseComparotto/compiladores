@@ -12,8 +12,8 @@ public class ExempleTest {
 
     public static void main(String[] args) {
 
-        final String TEST_INPUT_FILE = "exemples/exemple1.cbr";
-        final String TEST_OUTPUT_FILE = "exemples/exemple1.xml";
+        final String TEST_INPUT_FILE = "exemples/exemple2.jpp";
+        final String TEST_OUTPUT_FILE = "exemples/exemple2.txt";
 
         try {
 
@@ -24,12 +24,7 @@ public class ExempleTest {
 
             LexicalScanner scanner = new LexicalScanner(source);
 
-            out.println("<file name='"+TEST_INPUT_FILE+"'>");
-
             out.println(replaceIn(source, scanner.getTokens()));
-
-            out.println("</file>");
-
 
             in.close();
             out.close();
