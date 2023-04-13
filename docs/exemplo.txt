@@ -1,0 +1,11 @@
+yomu(x);
+
+y := x * 2;
+
+tameni i kara 0 made y ho 1 {
+
+    moshi i > 10 {
+        kaku (i, " passou de 10");
+    }
+
+}

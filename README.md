@@ -157,25 +157,25 @@ EBNF: `<ope> ::= <assign-operator> | <aritm-operator> | <rel-operator> | <logic-
 
 ##### Atribuição `<assign-operator>`
 
-EBNF: `<assign-operator> := =`
+EBNF: `<assign-operator> ::= =`
 
 RegExp: `/=/`
 
 ##### Aritiméticos `<aritm-operator>`
 
-EBNF: `<aritm-operator> := + | - | * | /`
+EBNF: `<aritm-operator> ::= + | - | * | /`
 
 RegExp: `/[\+\-\*\/]/`
 
 ##### Relacionais `<rel-operator>`
 
-EBNF: `<rel-operator> := == | != | <= | >= | < | >`
+EBNF: `<rel-operator> ::= == | != | <= | >= | < | >`
 
 RegExp: `/==|!=|<=|>=|<|>/`
 
 ##### Lógicos `<logic-operator>`
 
-EBNF: `<logic-operator> := nao | e | ou`
+EBNF: `<logic-operator> ::= nao | e | ou`
 
 RegExp: `/nao|e|ou/`
 
