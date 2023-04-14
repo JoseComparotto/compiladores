@@ -92,13 +92,13 @@
 <aritm-add-binary-expression> = 
     <aritm-add-binary-expression>,
     <aritm-add-operator>,
-    <aritm-multi-binary-expression>
+    <aritm-mult-binary-expression>
 | 
-    <aritm-multi-binary-expression>;
+    <aritm-mult-binary-expression>;
 
-<aritm-multi-binary-expression> = 
-    <aritm-multi-binary-expression>,
-    <aritm-multi-operator>,
+<aritm-mult-binary-expression> = 
+    <aritm-mult-binary-expression>,
+    <aritm-mult-operator>,
     <aritm-unary-expression>
 |   
     <aritm-unary-expression>;
@@ -123,7 +123,7 @@
 
 (* Operadores *)
 <aritm-add-operator> = '+' | '-';
-<aritm-multi-operator> = '*' | '/';
+<aritm-mult-operator> = '*' | '/';
 <aritm-operator> = <aritm-add-operator> | <aritm-mult-operator>;
 <rel-operator> = '==' | '!=' | '<=' | '>=' | '<' | '>';
 <logic-or-operator> ='mata';

@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
+import java_cup.runtime.Symbol;
 import me.josecomparotto.cbr.Helpers;
 
-public class LexicalScanner implements Iterable<Token> {
+public class LexicalScanner implements java_cup.runtime.Scanner, Iterable<Token> {
 
     private final List<Token> tokens;
 
@@ -23,6 +24,15 @@ public class LexicalScanner implements Iterable<Token> {
 
     public Token[] getTokens(){
         return tokens.toArray(new Token[0]);
+    }
+
+    @Override
+    public Symbol next_token() throws Exception {
+        if(tokens.size() > 0) 
+            return tokens.remove(0);    
+        else
+            return new Symbol(0);
+        
     }
 
     @Override
@@ -54,9 +64,8 @@ public class LexicalScanner implements Iterable<Token> {
                 String value = m.group();
                 int tokenStart = m.start();
                 int tokenEnd = m.end();
-                String tokenAddress = Helpers.toLineColumnAddress(tokenStart, inputString);
 
-                Token token = new Token(symbol, value, tokenStart, tokenEnd, tokenAddress);
+                Token token = new Token(symbol, value, tokenStart, tokenEnd);
 
                 boolean reject = false;
 
@@ -112,7 +121,7 @@ public class LexicalScanner implements Iterable<Token> {
             } else if (lastUnknownIndex != -1) {
                 throw new RuntimeException(
                         "Token não identificado: '" + Helpers.escape(inputString.substring(lastUnknownIndex, i))
-                                + "', em #" + lastUnknownIndex + " " + Helpers.toLineColumnAddress(lastUnknownIndex, inputString));
+                                + "', em " + Helpers.toLineColumnAddress(lastUnknownIndex, inputString));
             }
         }
 

@@ -2,7 +2,7 @@ kaku("Informe um numero natural: ");
 
 yomu(x);
 
-mochi ( x < 0 ) {
+moshi ( x < 0 ) {
     kaku ("Numero invalido");
 } soreigai {
 

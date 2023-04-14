@@ -3,6 +3,8 @@ package me.josecomparotto.cbr.lexical;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import me.josecomparotto.cbr.syntax.JCupSymbols;
+
 public enum Dictionary {
 
     // Tokens invisiveis
@@ -37,6 +39,7 @@ public enum Dictionary {
     SUB_OPERATOR("-"),
 
     // Operadores relacionais
+    NOT_EQUALS_OPERATOR("=="),
     EQUALS_OPERATOR("=="),
     LESS_THEN_OR_EQUALS_OPERATOR("<="),
     GREATER_THEN_OR_EQUALS_OPERATOR(">="),
@@ -91,6 +94,21 @@ public enum Dictionary {
 
     public Matcher matcher(CharSequence input) {
         return this.pattern.matcher(input);
+    }
+
+    public int getId(){
+
+        try {
+
+            return JCupSymbols.class.getField(this.name()).getInt(null);
+
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+
+            return -1;
+
+        }
+
+        
     }
 
 }

@@ -1,0 +1,204 @@
+terminal 
+    SEMICOLON,
+    COMMA,
+    KEYWORD_KAKU,
+    KEYWORD_YOMU,
+    KEYWORD_MOSHI,
+    KEYWORD_SOREIGAI,
+    KEYWORD_TAMENI,
+    KEYWORD_KARA,
+    KEYWORD_MADE,
+    KEYWORD_HO,
+    KEYWORD_NISE,
+    KEYWORD_SHIN,
+    KEYWORD_SHINAI,
+    KEYWORD_MO,
+    KEYWORD_MATA,
+    PRODUCT_OPERATOR,
+    DIV_OPERATOR,
+    SUM_OPERATOR,
+    SUB_OPERATOR,
+    NOT_EQUALS_OPERATOR,
+    EQUALS_OPERATOR,
+    LESS_THEN_OR_EQUALS_OPERATOR,
+    GREATER_THEN_OR_EQUALS_OPERATOR,
+    GREATER_THEN_OPERATOR,
+    LESS_THEN_OPERATOR,
+    ASSIGNMENT_OPERATOR,
+    PARENTHESIS_OPENING,
+    PARENTHESIS_CLOSURE,
+    BLOCK_OPENING,
+    BLOCK_CLOSURE,
+    NUMBER_LITERAL,
+    TEXT_LITERAL,
+    IDENTIFIER;
+
+non terminal 
+    program,
+    scope_block,
+    scope,
+    instruction,
+    command,
+    structure,
+    input_command,
+    output_command,
+    assign_command,
+    conditional_structure,
+    simple_conditional_structure,
+    repeat_structure,
+    parameters,
+    value,
+    logic_or_expression,
+    logic_and_expression,
+    logic_not_expression,
+    rel_expression,
+    aritm_add_binary_expression,
+    aritm_mult_binary_expression,
+    aritm_unary_expression,
+    primitive_value,
+    const,
+    bool_literal,
+    aritm_add_operator,
+    aritm_mult_operator,
+    rel_operator,
+    logic_or_operator,
+    logic_and_operator,
+    logic_not_operator;
+
+
+program ::= scope;
+
+/* Escopos */
+scope_block ::= BLOCK_OPENING scope BLOCK_CLOSURE;
+
+scope ::= instruction | scope instruction;
+
+/* Instruções: Comandos e Estruturas */
+instruction ::= command SEMICOLON | structure;
+
+command ::= 
+    input_command |
+    output_command |
+    assign_command;
+
+structure ::=
+    conditional_structure |
+    repeat_structure;
+
+/* Comando de entrada */
+input_command ::= KEYWORD_YOMU PARENTHESIS_OPENING IDENTIFIER PARENTHESIS_CLOSURE;
+
+/* Comando de saída. Aceita um ou vários parâmetros */
+output_command ::=
+    KEYWORD_KAKU PARENTHESIS_OPENING parameters PARENTHESIS_CLOSURE;
+
+/* Comando de atribuição */
+assign_command ::= IDENTIFIER ASSIGNMENT_OPERATOR value;
+
+/* Estrutura condicional */
+conditional_structure ::=
+    simple_conditional_structure |
+    simple_conditional_structure KEYWORD_SOREIGAI scope_block;
+
+simple_conditional_structure ::=
+    KEYWORD_MOSHI PARENTHESIS_OPENING value PARENTHESIS_CLOSURE scope_block;
+
+/* Estrutura de repetição "para" */
+repeat_structure ::= 
+    KEYWORD_TAMENI IDENTIFIER
+    KEYWORD_KARA value
+    KEYWORD_MADE value
+    KEYWORD_HO value
+    scope_block;
+repeat_structure ::=   
+    KEYWORD_TAMENI IDENTIFIER     
+    KEYWORD_KARA value
+    KEYWORD_MADE value
+    scope_block;
+
+
+parameters ::= value | parameters COMMA value;
+
+value ::= logic_or_expression;
+
+/* Expressões Lógicas */
+logic_or_expression ::= 
+    logic_or_expression
+    logic_or_operator
+    logic_and_expression;
+logic_or_expression ::= logic_and_expression;
+
+logic_and_expression ::= 
+    logic_and_expression
+    logic_and_operator
+    logic_not_expression;
+logic_and_expression ::= logic_not_expression;
+
+logic_not_expression ::= 
+    logic_not_operator
+    rel_expression;
+logic_not_expression ::= rel_expression;
+
+/* Expressões Relacionais */
+rel_expression ::= 
+    aritm_add_binary_expression
+    rel_operator
+    aritm_add_binary_expression;
+rel_expression ::= aritm_add_binary_expression;
+
+/* Expressões Aritméticas */
+aritm_add_binary_expression ::= 
+    aritm_add_binary_expression
+    aritm_add_operator
+    aritm_mult_binary_expression;
+aritm_add_binary_expression ::= aritm_mult_binary_expression;
+
+aritm_mult_binary_expression ::= 
+    aritm_mult_binary_expression
+    aritm_mult_operator
+    aritm_unary_expression;
+aritm_mult_binary_expression ::= aritm_unary_expression;
+
+aritm_unary_expression ::=
+    aritm_add_operator
+    primitive_value;
+aritm_unary_expression ::= primitive_value;
+
+primitive_value ::=
+    const |
+    IDENTIFIER |
+    PARENTHESIS_OPENING value PARENTHESIS_CLOSURE;
+
+/* Constantes (literais) */
+const ::= TEXT_LITERAL | NUMBER_LITERAL | bool_literal;
+bool_literal ::= KEYWORD_SHIN | KEYWORD_NISE; 
+
+/* Operadores */
+aritm_add_operator ::= SUM_OPERATOR | SUB_OPERATOR;
+aritm_mult_operator ::= PRODUCT_OPERATOR | DIV_OPERATOR;
+
+rel_operator ::= 
+    EQUALS_OPERATOR |
+    NOT_EQUALS_OPERATOR |
+    LESS_THEN_OR_EQUALS_OPERATOR |
+    GREATER_THEN_OR_EQUALS_OPERATOR |
+    LESS_THEN_OPERATOR |
+    GREATER_THEN_OPERATOR;
+
+logic_or_operator ::= KEYWORD_MATA;
+logic_and_operator ::= KEYWORD_MO;
+logic_not_operator ::= KEYWORD_SHINAI;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
