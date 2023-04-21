@@ -12,77 +12,89 @@ Curso: Engenharia da Computação
 
 Perído: 2023.1 - 3º Semestre
 
-## Linguagem CBR
+## Linguagem J++ (Japan Plus Plus)
 
-O objetivo deste trabalho é desenvolver um compilador, em Java, para a linguagem "CBR", que é inspirada na linguagem "C", porém em português.
+O objetivo deste trabalho é desenvolver um compilador, em Java, para a linguagem "J++", que é inspirada na linguagem "C", porém em Japonês.
 
 ### Exemplos
 
 Exempo 1: Código-fonte de um programa escrito na linguagem **C**.
 
 ```c
-int x;
-int y;
-int i;
+#include <stdio.h>
 
-scanf("%d", &x);
+int main(){
+    int x, resultado;
 
-y = x * 2;
+    printf("Informe um numero natural: ");
 
-for (i=0;i<y;i++){
+    scanf("%d", &x);
 
-    if (i>10){
-        printf("%d passou de 10", i);
+    if ( x < 0 ) {
+        printf ("Numero invalido");
+    } else {
+
+        resultado = 1;
+        
+        for(int i = 1; i < x; i++) {
+
+            resultado = resultado * i;
+
+        }
+
+        printf("%d! = %d", x, resultado);
     }
 
+    return 0;
 }
 ```
 
-Exemplo 2: Código-fonte do mesmo programa escrito na linguagem **CBR**.
+Exemplo 2: Código-fonte do mesmo programa escrito na linguagem **J++**.
 
-```
-inteiro x;
-inteiro y;
-inteiro i;
+```jpp
+kaku("Informe um numero natural: ");
 
-leia(x);
+yomu(x);
 
-y = x * 2;
+moshi ( x < 0 ) {
+    kaku ("Numero invalido");
+} soreigai {
 
-para i de 0 ate y passo 1 {
+    resultado := 1;
+    
+    tameni i kara 1 made x ho 1 {
 
-    se ( i > 10 ){
-        escreva("%d passou de 10", i);
+        resultado := resultado * i;
+
     }
+
+    kaku (x, "! = ", resultado);
 
 }
 ```
 
 ### Alfabeto: Lista de caracteres aceitos
 
-Caracteres: `abcdefghijklmnopqrstuvwxyz0123456789_=+-*/><!.(){};"`
+Caracteres: `abcdefghijklmnopqrstuvwxyz0123456789_=:+-*/><!.,(){};" \t\n`
 
-Expressão Regular: `/[a-z0-9\_\=\+\-\*\/\>\<\!\.\(\)\{\}\;\"\n ]/g`
+Expressão Regular: `/[a-z0-9\_\=\:\+\-\*\/\>\<\!\.\,\(\)\{\}\;\"\ \t\n]/g`
 
 ### Dicionário: Lista de palavras reservadas
 
-* `leia`
-* `escreva`
-* `para`
-* `de`
-* `passo`
-* `se`
-* `senao`
-* `inteiro`
-* `texto`
-* `real`
-* `logico`
-* `verdadeiro`
-* `falso`
-* `e`
-* `ou`
-* `nao`
-* `=`
+* `yomu`
+* `kaku`
+* `tameni`
+* `kara`
+* `made`
+* `ho`
+* `moshi`
+* `soreigai`
+* `shin`
+* `nise`
+* `mo`
+* `mata`
+* `shinai`
+* `:=`
 * `+`
 * `-`
 * `*`
@@ -98,88 +110,74 @@ Expressão Regular: `/[a-z0-9\_\=\+\-\*\/\>\<\!\.\(\)\{\}\;\"\n ]/g`
 * `{`
 * `}`
 * `;`
+* `,`
 
 ### Gramática Léxica
 
-#### Identificadores `<identifier>`
+#### Identificador de variaveis: `<identifier>`
 
-EBNF: `<identifier> ::= <nondigit> | <identifier> <alpha>`
+`<identifier> = <letter>, { <alpha> };`
 
-RegExp: `/[_a-z][_a-z0-9]*/`
+#### Constantes `<const>`
 
-##### Caracteres numéricos `<digit>`
+`<const> = <text-literal> | <number-literal> | <bool-literal>;`
 
-EBNF: `<digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
+#### Literais Numéricos `<number-literal>`
 
-RegExp: `/[0-9]/`
+`<number-literal> = { <digit> } | { <digit> }, '.', { <digit> };`
 
-##### Caracteres não-numericos `<nondigit>`
+#### Literais Lógicos `<bool-literal>`
 
-EBNF: `<nondigit> ::= _ | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z`
+`<bool-literal> = 'shin' | 'nise';`
 
-RegExp: `/[_a-z]/`
+#### Literais de Texto `<text-literal>`
 
-##### Caracteres Alfanuméricos `<alpha>`
+`<text-literal> = '"', { <any> - '"' }, '"';`
 
-EBNF: `<alpha> ::= <nondigit> | <digit>`
+#### Operadores Aritiméticos Aditivos `<aritm-add-operator>`
 
-RegExp: `/[_a-z0-9]/`
+`<aritm-add-operator> = '+' | '-';`
 
-#### Literais `<literal>`
+#### Operadores Aritiméticos Multiplicativos `<aritm-mult-operator>`
 
-EBNF: `<const> ::= <text-literal> | <integer-literal> | <float-literal> | <bool-literal> `
+`<aritm-mult-operator> = '*' | '/';`
 
-##### Inteiros `<integer-literal>`
+#### Operadores Relacionais `<rel-operator>`
 
-EBNF: `<integer-literal> ::= <digit> | <integer-literal> <digit>`
+`<rel-operator> = '==' | '!=' | '<=' | '>=' | '<' | '>';`
 
-RegExp: `/[0-9]+/`
+#### Operador Lógico de Disjunção (OU) `<logic-or-operator>`
 
-##### Reais `<float-literal>`
+`<logic-or-operator> = 'mata';`
 
-EBNF: `<float-literal> ::= <integer-literal> | <integer-literal> . <integer-literal>  `
+#### Operador Lógico de Conjunção (E) `<logic-and-operator>`
 
-RegExp: `/[0-9]+/`
+`<logic-and-operator> = 'mo';`
 
-##### Lógicos `<bool-literal>`
+#### Operador Lógico de Negação (NÃO) `<logic-not-operator>`
 
-EBNF: `<bool-literal> ::= verdadeiro | falso`
+`<logic-not-operator> = 'shinai';`
 
-RegExp: `/[_a-z]/`
+#### Qualquer caractere `<any>`
 
-##### Texto `<text-literal>`
+`<any> = <alpha> | <special> | <blank>;`
 
-RegExp: `/"((?:\\(u[0-9a-f]{4}|[0-7]{3}|x[0-9a-f]{2}|[btnfr'"\\]))|[^\"\n\\])*"/i`
+#### Caracteres Alfanumérico `<alpha>`
 
-#### Operadores `<ope>`
+`<alpha> = <letter> | <digit>;`
 
-EBNF: `<ope> ::= <assign-operator> | <aritm-operator> | <rel-operator> | <logic-operator>`
+#### Caracteres Numérico `<digit>`
 
-##### Atribuição `<assign-operator>`
+`<digit> = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';`
 
-EBNF: `<assign-operator> ::= =`
+#### Caracteres de letras `<letter>`
 
-RegExp: `/=/`
+`<letter> = '_' | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z';`
 
-##### Aritiméticos `<aritm-operator>`
+#### Caracteres Especiais `<special>`
 
-EBNF: `<aritm-operator> ::= + | - | * | /`
+`<special> = '=' | ':' | '+' | '-' | '*' | '/' | '>' | '<' | '!' | '.' | ',' | '(' | ')' | '{' | '}' | ';' | '"';`
 
-RegExp: `/[\+\-\*\/]/`
+#### Caracteres Invisíveis `<blank>`
 
-##### Relacionais `<rel-operator>`
-
-EBNF: `<rel-operator> ::= == | != | <= | >= | < | >`
-
-RegExp: `/==|!=|<=|>=|<|>/`
-
-##### Lógicos `<logic-operator>`
-
-EBNF: `<logic-operator> ::= nao | e | ou`
-
-RegExp: `/nao|e|ou/`
-
-#### Tipos primitivos `<type>`
-
-EBNF: `<type> ::= inteiro | real | texto | logico`
-RegEx: `/inteiro|real|texto|logico/`
+`<blank> = ' ' | '\n' | '\t';`

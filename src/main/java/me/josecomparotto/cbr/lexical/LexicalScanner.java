@@ -126,7 +126,7 @@ public class LexicalScanner implements java_cup.runtime.Scanner, Iterable<Token>
         }
 
         return finalTokens.stream()
-                .filter(t -> !t.symbol.equals(Dictionary.COMMENT) && !t.symbol.equals(Dictionary.WHITE_SPACES))
+                .filter(t -> !t.symbol.equals(Dictionary.COMMENT) && !t.symbol.equals(Dictionary.BLANK))
                 .sorted((a, b) -> a.start - b.start)
                 .collect(Collectors.toList());
     }

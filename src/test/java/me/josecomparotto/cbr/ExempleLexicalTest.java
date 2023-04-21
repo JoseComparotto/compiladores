@@ -13,7 +13,7 @@ public class ExempleLexicalTest {
     public static void main(String[] args) {
 
         final String TEST_INPUT_FILE = "exemples/exemple1.jpp";
-        final String TEST_OUTPUT_FILE = "exemples/exemple1.txt";
+        final String TEST_OUTPUT_FILE = "exemples/exemple1.tokens.txt";
 
         try {
 

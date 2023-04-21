@@ -5,9 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-import java_cup.runtime.Symbol;
 import me.josecomparotto.cbr.lexical.LexicalScanner;
-import me.josecomparotto.cbr.lexical.Token;
 import me.josecomparotto.cbr.syntax.SyntaxParser;
 
 public class ExempleSyntaxTest {

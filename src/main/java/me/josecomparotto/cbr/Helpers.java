@@ -11,8 +11,7 @@ import java.io.InputStreamReader;
 public class Helpers {
 
     public static String escape(String s) {
-        s = s
-                .replace("\\", "\\\\")
+        s = s.replace("\\", "\\\\")
                 .replace("\b", "\\b")
                 .replace("\t", "\\t")
                 .replace("\n", "\\n")
@@ -50,18 +49,18 @@ public class Helpers {
         int column = 0;
 
         String[] lines = text.split("\n");
-        
+
         int currPosition = 0;
 
-        for (line = 0; line < lines.length;line++) {
-            if(currPosition + lines[line].length()+1 > position){
+        for (line = 0; line < lines.length; line++) {
+            if (currPosition + lines[line].length() + 1 > position) {
                 column = position - currPosition;
                 break;
             }
-            currPosition += lines[line].length()+1;
+            currPosition += lines[line].length() + 1;
         }
 
-        return "linha " + (line+1) + ", coluna " + (column+1);
+        return "linha " + (line + 1) + ", coluna " + (column + 1);
     }
 
 }

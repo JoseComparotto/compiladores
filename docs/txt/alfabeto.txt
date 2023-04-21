@@ -1,1 +1,1 @@
-abcdefghijklmnopqrstuvwxyz0123456789_=:+-*/><!.,(){};"   
+abcdefghijklmnopqrstuvwxyz0123456789_=:+-*/><!.,(){};" \t\n

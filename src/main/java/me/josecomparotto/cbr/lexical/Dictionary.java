@@ -9,7 +9,7 @@ public enum Dictionary {
 
     // Tokens invisiveis
     COMMENT("//[\\s\\S]*?[\\n\\r]+|/\\*[\\s\\S]*?\\*/"), // Formato de comentário: // comentário
-    WHITE_SPACES("[\\s\\n]+"), // Delimitador de tokens: Caracteres invisíveis
+    BLANK("[\\s\\n]+"), // Delimitador de tokens: Caracteres invisíveis
 
     // Delimitador de instruções
     SEMICOLON(";"),
