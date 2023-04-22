@@ -4,7 +4,7 @@
 // Sat Apr 15 14:54:41 UTC 2023
 //----------------------------------------------------
 
-package me.josecomparotto.cbr.syntax;
+package me.josecomparotto.compilador.syntax;
 
 /** CUP generated class containing symbol constants. */
 public class JCupSymbols {

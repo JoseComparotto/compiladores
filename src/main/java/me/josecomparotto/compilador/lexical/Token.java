@@ -1,7 +1,7 @@
-package me.josecomparotto.cbr.lexical;
+package me.josecomparotto.compilador.lexical;
 
-import me.josecomparotto.cbr.Helpers;
 import java_cup.runtime.Symbol;
+import me.josecomparotto.compilador.Helpers;
 
 public class Token extends Symbol{
 

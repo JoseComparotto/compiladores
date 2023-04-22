@@ -1,4 +1,4 @@
-package me.josecomparotto.cbr.syntax;
+package me.josecomparotto.compilador.syntax;
 
 import java.util.ArrayList;
 import java.util.Arrays;

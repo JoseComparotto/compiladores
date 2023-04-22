@@ -4,9 +4,9 @@
 // Sat Apr 15 14:54:41 UTC 2023
 //----------------------------------------------------
 
-package me.josecomparotto.cbr.syntax;
+package me.josecomparotto.compilador.syntax;
 
-import me.josecomparotto.cbr.syntax.Rule;
+import me.josecomparotto.compilador.syntax.Rule;
 
 /** CUP v0.10j generated parser.
   * @version Sat Apr 15 14:54:41 UTC 2023

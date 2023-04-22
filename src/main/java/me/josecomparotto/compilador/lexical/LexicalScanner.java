@@ -1,4 +1,4 @@
-package me.josecomparotto.cbr.lexical;
+package me.josecomparotto.compilador.lexical;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 import java_cup.runtime.Symbol;
-import me.josecomparotto.cbr.Helpers;
+import me.josecomparotto.compilador.Helpers;
 
 public class LexicalScanner implements java_cup.runtime.Scanner, Iterable<Token> {
 

@@ -1,4 +1,4 @@
-package me.josecomparotto.cbr;
+package me.josecomparotto.compilador;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;

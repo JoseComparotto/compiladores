@@ -1,18 +1,18 @@
-package me.josecomparotto.cbr;
+package me.josecomparotto.compilador;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-import me.josecomparotto.cbr.lexical.LexicalScanner;
-import me.josecomparotto.cbr.lexical.Token;
+import me.josecomparotto.compilador.lexical.LexicalScanner;
+import me.josecomparotto.compilador.lexical.Token;
 
 public class ExempleLexicalTest {
 
     public static void main(String[] args) {
 
-        final String TEST_INPUT_FILE = "exemples/exemple1.jpp";
+        final String TEST_INPUT_FILE = "docs/txt/exemplo.txt";
         final String TEST_OUTPUT_FILE = "exemples/exemple1.tokens.txt";
 
         try {

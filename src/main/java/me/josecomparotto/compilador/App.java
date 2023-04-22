@@ -1,4 +1,4 @@
-package me.josecomparotto.cbr;
+package me.josecomparotto.compilador;
 
 /**
  * Hello world!
