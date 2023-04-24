@@ -9,18 +9,17 @@
     A minha linguagem é fracamente tipada.
 *)
 
-<program> = <scope>;
+<program> = <context>;
 
 (* Escopos *)
-<scope-block> = '{', <scope>, '}' | <instruction>;
+<context-block> = '{', <context>, '}' | <instruction>;
 
-<scope> = { <instruction> };
+<context> = { <instruction> };
 
 (* Instruções: Comandos e Estruturas *)
 <instruction> = <command>, ';' | <structure>;
 
 <command> = 
-    <input-command> |
     <output-command> |
     <assign-command>;
 
@@ -29,20 +28,20 @@
     <repeat-structure>;
 
 (* Comando de entrada *)
-<input-command> = 'yomu', '(', <identifier> ,')';
+<input-value> = '?';
+<input-line> = '??';
 
 (* Comando de saída. Aceita um, ou vários parâmetros *)
 <output-command> =
-    'kaku', '(', <value> ,')' |
-    'kaku', '(', <value>, {',', <value>}, ')';
+    'kaku', '(', <value> ,')';
 
 (* Comando de atribuição *)
 <assign-command> = <identifier>,':=', <value>;
 
 (* Estrutura condicional *)
 <conditional-structure> =
-    'moshi', '(' , <value>, ')', <scope-block> |
-    'moshi', '(' , <value>, ')', <scope-block>, 'soreigai', <scope-block>;
+    'moshi', '(' , <value>, ')', <context-block> |
+    'moshi', '(' , <value>, ')', <context-block>, 'soreigai', <context-block>;
 
 (* Estrutura de repetição "para" *)
 <repeat-structure> =   
@@ -50,14 +49,22 @@
     'kara', <value>,
     'made', <value>,
     'ho', <value>,
-    <scope-block> |   
+    <context-block> |   
     'tameni', <identifier>,     
     'kara', <value>,
     'made', <value>,
-    <scope-block>;
+    <context-block>;
 
 (* Expressões *)
-<value> = <logic-or-expression>;
+<value> = <concat-expression>;
+
+(* Expressão de concatenação *)
+<concat-expression> = 
+    <concat-expression>,
+    <concat-operator>,
+    <logic-or-expression>
+| 
+    <logic-or-expression>;
 
 (* Expressões Lógicas *)
 <logic-or-expression> = 
@@ -109,7 +116,7 @@
 |
     <primitive-value>;
 
-<primitive-value> = <const> | <identifier> | '(', <value>,  ')';
+<primitive-value> = <const> | <identifier> | '(', <value>,  ')' | <input-value> | <input-line>;
 
 
 (* Identificador de variaveis: *)
@@ -122,6 +129,7 @@
 <text-literal> = '"', { <any> - '"' }, '"';
 
 (* Operadores *)
+<concat-operator> = '.';
 <aritm-add-operator> = '+' | '-';
 <aritm-mult-operator> = '*' | '/';
 <aritm-operator> = <aritm-add-operator> | <aritm-mult-operator>;

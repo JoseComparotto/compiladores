@@ -12,8 +12,8 @@ public class CompileJCupGrammar {
 
         final String JCUP_GRAMMAR_FILE = "docs/jcup/gramatica.cup";
 
-        final String SYNTAX_JAVA_LOCATION = "src/main/java/me/josecomparotto/cbr/syntax";
-        final String SYNTAX_PACKAGE = "me.josecomparotto.cbr.syntax";
+        final String SYNTAX_JAVA_LOCATION = "src/main/java/me/josecomparotto/compilador/syntax";
+        final String SYNTAX_PACKAGE = "me.josecomparotto.compilador.syntax";
 
         final String PARSER_CLASS = "SyntaxParser";
         final String SYMBOLS_CLASS = "JCupSymbols";

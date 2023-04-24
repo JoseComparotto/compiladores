@@ -26,6 +26,8 @@ public class ExempleSyntaxTest {
 
             SyntaxParser parser = new SyntaxParser(scanner);
 
+            System.setOut(out);
+
             parser.parse();
 
             in.close();

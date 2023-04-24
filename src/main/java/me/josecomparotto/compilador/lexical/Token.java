@@ -12,7 +12,7 @@ public class Token extends Symbol{
     public final int length;
 
     public Token(Dictionary symbol, String value, int start, int end) {
-        super(symbol.getId(), "<token value='"+Helpers.escape(value)+"'/>");
+        super(symbol.getId(), value);
 
         this.symbol = symbol;
         this.value = value;

@@ -105,16 +105,16 @@
     <module name="JavadocStyle" />
     <module name="JavadocType" />
     <module name="JavadocVariable">
-      <property name="scope" value="protected" /> <!-- *** don't document private fields -->
+      <property name="context" value="protected" /> <!-- *** don't document private fields -->
     </module>
     <module name="MissingJavadocMethod">
-      <property name="scope" value="package" />
+      <property name="context" value="package" />
       <property name="allowMissingPropertyJavadoc" value="true" />
       <property name="minLineCount" value="2" />
       <property name="allowedAnnotations" value="Override,Test,ParameterizedTest,Before,BeforeClass,BeforeEach,BeforeAll,After,AfterClass,AfterEach,AfterAll,DisplayName" />
     </module>
     <module name="MissingJavadocType">
-      <property name="scope" value="package" />
+      <property name="context" value="package" />
     </module>
     <!-- Metrics -->
     <!-- Miscellaneous -->

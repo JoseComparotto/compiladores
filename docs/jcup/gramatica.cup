@@ -1,10 +1,12 @@
-import me.josecomparotto.cbr.syntax.Rule;
+import me.josecomparotto.compilador.semantic.*;
+import me.josecomparotto.compilador.semantic.expression.*;
+import me.josecomparotto.compilador.semantic.instruction.*;
+import me.josecomparotto.compilador.semantic.literal.*;
 
-terminal Object
+terminal String
     SEMICOLON,
     COMMA,
     KEYWORD_KAKU,
-    KEYWORD_YOMU,
     KEYWORD_MOSHI,
     KEYWORD_SOREIGAI,
     KEYWORD_TAMENI,
@@ -16,9 +18,12 @@ terminal Object
     KEYWORD_SHINAI,
     KEYWORD_MO,
     KEYWORD_MATA,
+    INPUT_VALUE_KEY,
+    INPUT_LINE_KEY,
+    CONCAT_OPERATOR,
     PRODUCT_OPERATOR,
     DIV_OPERATOR,
-    SUM_OPERATOR,
+    ADD_OPERATOR,
     SUB_OPERATOR,
     NOT_EQUALS_OPERATOR,
     EQUALS_OPERATOR,
@@ -35,55 +40,57 @@ terminal Object
     TEXT_LITERAL,
     IDENTIFIER;
 
-non terminal Object
-    program,
-    scope_block,
-    scope,
+
+non terminal Program program;
+non terminal Context context_block, context;
+non terminal Instruction
     instruction,
     command,
-    structure,
-    input_command,
     output_command,
     assign_command,
+    structure,
     conditional_structure,
     simple_conditional_structure,
-    repeat_structure,
-    parameters,
+    complete_conditional_structure,
+    repeat_structure;
+non terminal Value
     value,
+    input_value,
+    input_line,
+    concat_expression,
     logic_or_expression,
     logic_and_expression,
     logic_not_expression,
     rel_expression,
+    aritm_unary_expression,
     aritm_add_binary_expression,
     aritm_mult_binary_expression,
-    aritm_unary_expression,
     primitive_value,
     const,
-    bool_literal,
-    aritm_add_operator,
-    aritm_mult_operator,
-    rel_operator,
+    bool_literal;
+non terminal String
     logic_or_operator,
     logic_and_operator,
     logic_not_operator;
 
 
-program ::= scope:s {:
-    RESULT = new Rule("program", s);
+program ::= context:s {:
+    RESULT = new Program(s);
 
     System.out.println(RESULT);
 :};
 
 /* Escopos */
-scope_block ::= BLOCK_OPENING scope:s BLOCK_CLOSURE {: RESULT = s; :};
+context_block ::= BLOCK_OPENING context:s BLOCK_CLOSURE {: RESULT = s; :};
 
-scope ::= instruction:i {: RESULT = new Rule("scope", i); :} | scope:s instruction:i {: RESULT = new Rule((Rule)s, i); :};
+context ::=
+    instruction:i {: RESULT = new Context(i); :} |
+    context:c instruction:i {: c.addInstruction(i); RESULT = c; :};
 
 /* Instruções: Comandos e Estruturas */
 instruction ::= command:c SEMICOLON {: RESULT = c; :} | structure:s {: RESULT = s; :};
 
 command ::= 
-    input_command:c {: RESULT = c; :} |
     output_command:c {: RESULT = c; :} |
     assign_command:c {: RESULT = c; :};
 
@@ -92,22 +99,35 @@ structure ::=
     repeat_structure:s {: RESULT = s; :};
 
 /* Comando de entrada */
-input_command ::= KEYWORD_YOMU PARENTHESIS_OPENING IDENTIFIER:i PARENTHESIS_CLOSURE {: RESULT = new Rule("input_command", i); :};
+input_value ::= INPUT_VALUE_KEY {: RESULT = new InputValue(); :};
+input_line ::= INPUT_LINE_KEY {: RESULT = new InputLine(); :};
 
 /* Comando de saída. Aceita um ou vários parâmetros */
 output_command ::=
-    KEYWORD_KAKU PARENTHESIS_OPENING parameters:p PARENTHESIS_CLOSURE {: RESULT = new Rule("output_command", p); :};
+    KEYWORD_KAKU PARENTHESIS_OPENING value:v PARENTHESIS_CLOSURE {: RESULT = new OutputCommand(v); :};
 
 /* Comando de atribuição */
-assign_command ::= IDENTIFIER:i ASSIGNMENT_OPERATOR value:v {: RESULT = new Rule("assign_command", i, v); :} ;
+assign_command ::= IDENTIFIER:i ASSIGNMENT_OPERATOR value:v {: RESULT = new AssignCommand(i, v); :} ;
 
 /* Estrutura condicional */
 conditional_structure ::=
-    simple_conditional_structure:s {: RESULT = s; :} |
-    simple_conditional_structure:s KEYWORD_SOREIGAI scope_block:sb {: RESULT = new Rule((Rule)s, sb); :} ;
+    complete_conditional_structure:s {: RESULT = s; :} |
+    simple_conditional_structure:s {: RESULT = s; :};
+
+complete_conditional_structure ::=
+    KEYWORD_MOSHI
+    PARENTHESIS_OPENING
+    value:v
+    PARENTHESIS_CLOSURE
+    context_block:tcb
+    KEYWORD_SOREIGAI
+    context_block:ecb {: RESULT = new ConditionalStructure(v, tcb, ecb); :};
 
 simple_conditional_structure ::=
-    KEYWORD_MOSHI PARENTHESIS_OPENING value:v PARENTHESIS_CLOSURE scope_block:sb {: RESULT = new Rule("conditional_structure", v, sb); :};
+    KEYWORD_MOSHI PARENTHESIS_OPENING
+    value:v
+    PARENTHESIS_CLOSURE
+    context_block:tcb {: RESULT = new ConditionalStructure(v, tcb); :};
 
 /* Estrutura de repetição "para" */
 repeat_structure ::= 
@@ -115,90 +135,114 @@ repeat_structure ::=
     KEYWORD_KARA value:from
     KEYWORD_MADE value:to
     KEYWORD_HO value:step
-    scope_block:sb {: RESULT = new Rule("repeat_structure", id, from, to, step, sb); :};
+    context_block:cb {: RESULT = new RepeatStructure(id, from, to, step, cb); :};
 repeat_structure ::= 
     KEYWORD_TAMENI IDENTIFIER:id
     KEYWORD_KARA value:from
     KEYWORD_MADE value:to
-    scope_block:sb {: RESULT = new Rule("repeat_structure", id, from, to, sb); :};
+    context_block:cb {: RESULT = new RepeatStructure(id, from, to, cb); :};
 
+value ::= concat_expression:e {: RESULT = e; :};
 
-parameters ::= value:v {: RESULT = new Rule("parameters", v); :} | parameters:p COMMA value:v {: RESULT = new Rule((Rule)p, v); :};
-
-value ::= logic_or_expression:e {: RESULT = e; :};
+/* Expressão de Concatenação */
+concat_expression ::= 
+    concat_expression:a
+    CONCAT_OPERATOR
+    logic_or_expression:b {: RESULT = new ConcatExpression(a, b); :};
+concat_expression ::= logic_or_expression:e {: RESULT = e; :};
 
 /* Expressões Lógicas */
 logic_or_expression ::= 
     logic_or_expression:a
-    logic_or_operator:o
-    logic_and_expression:b {: RESULT = new Rule("binary_expression", o, a, b); :};
+    logic_or_operator
+    logic_and_expression:b {: RESULT = new OrExpression(a, b); :};
 logic_or_expression ::= logic_and_expression:e {: RESULT = e; :};
 
 logic_and_expression ::= 
     logic_and_expression:a
-    logic_and_operator:o
-    logic_not_expression:b {: RESULT = new Rule("binary_expression", o, a, b); :};
+    logic_and_operator
+    logic_not_expression:b {: RESULT = new AndExpression(a, b); :};
 logic_and_expression ::= logic_not_expression:e {: RESULT = e; :};
 
 logic_not_expression ::= 
-    logic_not_operator:o
-    rel_expression:a {: RESULT = new Rule("unary_expression", o, a); :};
+    logic_not_operator
+    rel_expression:a {: RESULT = new NotExpression(a); :};
 logic_not_expression ::= rel_expression:e {: RESULT = e; :};
 
 /* Expressões Relacionais */
 rel_expression ::= 
     aritm_add_binary_expression:a
-    rel_operator:o
-    aritm_add_binary_expression:b {: RESULT = new Rule("binary_expression", o, a, b); :};
+    EQUALS_OPERATOR
+    aritm_add_binary_expression:b {: RESULT = new EqualsExpression(a, b); :};
+rel_expression ::= 
+    aritm_add_binary_expression:a
+    NOT_EQUALS_OPERATOR
+    aritm_add_binary_expression:b {: RESULT = new NotEqualsExpression(a, b); :};
+rel_expression ::= 
+    aritm_add_binary_expression:a
+    LESS_THEN_OPERATOR
+    aritm_add_binary_expression:b {: RESULT = new LessThenExpression(a, b); :};
+rel_expression ::= 
+    aritm_add_binary_expression:a
+    GREATER_THEN_OPERATOR
+    aritm_add_binary_expression:b {: RESULT = new GreaterThenExpression(a, b); :};
+rel_expression ::= 
+    aritm_add_binary_expression:a
+    GREATER_THEN_OR_EQUALS_OPERATOR
+    aritm_add_binary_expression:b {: RESULT = new GreaterThenOrEqualsExpression(a, b); :};
+rel_expression ::= 
+    aritm_add_binary_expression:a
+    LESS_THEN_OR_EQUALS_OPERATOR
+    aritm_add_binary_expression:b {: RESULT = new LessThenOrEqualsExpression(a, b); :};
 rel_expression ::= aritm_add_binary_expression:e {: RESULT = e; :};
 
 /* Expressões Aritméticas */
 aritm_add_binary_expression ::= 
     aritm_add_binary_expression:a
-    aritm_add_operator:o
-    aritm_mult_binary_expression:b {: RESULT = new Rule("binary_expression", o, a, b); :};
+    ADD_OPERATOR
+    aritm_mult_binary_expression:b {: RESULT = new AddExpression(a, b); :};
+aritm_add_binary_expression ::= 
+    aritm_add_binary_expression:a
+    SUB_OPERATOR
+    aritm_mult_binary_expression:b {: RESULT = new SubExpression(a, b); :};
 aritm_add_binary_expression ::= aritm_mult_binary_expression:e {: RESULT = e; :};
 
 aritm_mult_binary_expression ::= 
     aritm_mult_binary_expression:a
-    aritm_mult_operator:o
-    aritm_unary_expression:b {: RESULT = new Rule("binary_expression", o, a, b); :};
+    PRODUCT_OPERATOR
+    aritm_unary_expression:b {: RESULT = new ProductExpression(a, b); :};
+aritm_mult_binary_expression ::= 
+    aritm_mult_binary_expression:a
+    DIV_OPERATOR
+    aritm_unary_expression:b {: RESULT = new DivExpression(a, b); :};
 aritm_mult_binary_expression ::= aritm_unary_expression:e {: RESULT = e; :};
 
 aritm_unary_expression ::=
-    aritm_add_operator:o
-    primitive_value:a {: RESULT = new Rule("unary_expression", o, a); :};
+    ADD_OPERATOR
+    primitive_value:a {: RESULT = new UnaryAddExpression(a); :};
+aritm_unary_expression ::=
+    SUB_OPERATOR
+    primitive_value:a {: RESULT = new UnarySubExpression(a); :};
 aritm_unary_expression ::= primitive_value:e {: RESULT = e; :};
 
 primitive_value ::=
     const:c {: RESULT = c; :} |
-    IDENTIFIER:id {: RESULT = new Rule("variable_value", id); :} |
-    PARENTHESIS_OPENING value:v PARENTHESIS_CLOSURE {: RESULT = new Rule("parenthesis", v); :};
+    IDENTIFIER:id {: RESULT = new Variable(id); :} |
+    PARENTHESIS_OPENING value:v PARENTHESIS_CLOSURE {: RESULT = v; :} |
+    input_value:v {: RESULT = v; :} |
+    input_line:v {: RESULT = v; :};
 
 /* Constantes (literais) */
 const ::=
-    TEXT_LITERAL:c {: RESULT = new Rule("text_literal", c); :} |
-    NUMBER_LITERAL:c {: RESULT = new Rule("number_literal", c); :} |
-    bool_literal:c {: RESULT = new Rule("bool_literal", c); :} ;
-bool_literal ::= KEYWORD_SHIN:c {: RESULT = c; :} | KEYWORD_NISE:c {: RESULT = c; :}; 
+    TEXT_LITERAL:c {: RESULT = new TextLiteral(c); :} |
+    NUMBER_LITERAL:c {: RESULT = new NumberLiteral(c); :} |
+    bool_literal:c {: RESULT = c; :} ;
+    
+bool_literal ::=
+    KEYWORD_SHIN:c {: RESULT = new BooleanLiteral(true); :} |
+    KEYWORD_NISE:c {: RESULT = new BooleanLiteral(false); :}; 
 
 /* Operadores */
-aritm_add_operator ::=
-    SUM_OPERATOR:o {: RESULT = o; :} |
-    SUB_OPERATOR:o {: RESULT = o; :};
-
-aritm_mult_operator ::=
-    PRODUCT_OPERATOR:o {: RESULT = o; :} |
-    DIV_OPERATOR:o {: RESULT = o; :};
-
-rel_operator ::= 
-    EQUALS_OPERATOR:o {: RESULT = o; :} |
-    NOT_EQUALS_OPERATOR:o {: RESULT = o; :} |
-    LESS_THEN_OR_EQUALS_OPERATOR:o {: RESULT = o; :} |
-    GREATER_THEN_OR_EQUALS_OPERATOR:o {: RESULT = o; :} |
-    LESS_THEN_OPERATOR:o {: RESULT = o; :} |
-    GREATER_THEN_OPERATOR:o {: RESULT = o; :};
-
 logic_or_operator ::= KEYWORD_MATA:o {: RESULT = o; :};
 logic_and_operator ::= KEYWORD_MO:o {: RESULT = o; :};
 logic_not_operator ::= KEYWORD_SHINAI:o {: RESULT = o; :};

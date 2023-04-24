@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.45.1">
-<file name="/workspaces/compiladores/src/main/java/me/josecomparotto/cbr/App.java">
-<error line="5" column="1" severity="error" message="Extra separation in import group before &apos;me.josecomparotto.cbr.lexical.LexicalScanner&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.ImportOrderCheck"/>
+<file name="/workspaces/compiladores/src/main/java/me/josecomparotto/compilador/App.java">
+<error line="5" column="1" severity="error" message="Extra separation in import group before &apos;me.josecomparotto.compilador.lexical.LexicalScanner&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.ImportOrderCheck"/>
 <error line="20" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
 <error line="30" column="11" severity="error" message="Catching &apos;Exception&apos; is not allowed." source="com.puppycrawl.tools.checkstyle.checks.coding.IllegalCatchCheck"/>
 </file>
-<file name="/workspaces/compiladores/src/main/java/me/josecomparotto/cbr/Helpers.java">
+<file name="/workspaces/compiladores/src/main/java/me/josecomparotto/compilador/Helpers.java">
 <error line="8" column="1" severity="error" message="Wrong order for &apos;java.io.BufferedReader&apos; import." source="com.puppycrawl.tools.checkstyle.checks.imports.ImportOrderCheck"/>
 <error line="11" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="11" column="1" severity="error" message="Utility classes should not have a public or default constructor." source="com.puppycrawl.tools.checkstyle.checks.design.HideUtilityClassConstructorCheck"/>
@@ -17,7 +17,7 @@
 <error line="35" column="14" severity="error" message="Assignment of parameter &apos;s&apos; is not allowed." source="com.puppycrawl.tools.checkstyle.checks.coding.ParameterAssignmentCheck"/>
 <error line="41" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
 </file>
-<file name="/workspaces/compiladores/src/main/java/me/josecomparotto/cbr/lexical/Dictionary.java">
+<file name="/workspaces/compiladores/src/main/java/me/josecomparotto/compilador/lexical/Dictionary.java">
 <error line="6" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="9" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
 <error line="10" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
@@ -54,7 +54,7 @@
 <error line="70" column="5" severity="error" message="Redundant &apos;private&apos; modifier." source="com.puppycrawl.tools.checkstyle.checks.modifier.RedundantModifierCheck"/>
 <error line="74" column="5" severity="error" message="Redundant &apos;private&apos; modifier." source="com.puppycrawl.tools.checkstyle.checks.modifier.RedundantModifierCheck"/>
 </file>
-<file name="/workspaces/compiladores/src/main/java/me/josecomparotto/cbr/lexical/Token.java">
+<file name="/workspaces/compiladores/src/main/java/me/josecomparotto/compilador/lexical/Token.java">
 <error line="5" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="7" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
 <error line="7" column="29" severity="error" message="Variable &apos;symbol&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
@@ -68,8 +68,8 @@
 <error line="11" column="22" severity="error" message="Variable &apos;length&apos; must be private and have accessor methods." source="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck"/>
 <error line="13" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
 </file>
-<file name="/workspaces/compiladores/src/main/java/me/josecomparotto/cbr/lexical/LexicalScanner.java">
-<error line="10" column="1" severity="error" message="Extra separation in import group before &apos;me.josecomparotto.cbr.Helpers&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.ImportOrderCheck"/>
+<file name="/workspaces/compiladores/src/main/java/me/josecomparotto/compilador/lexical/LexicalScanner.java">
+<error line="10" column="1" severity="error" message="Extra separation in import group before &apos;me.josecomparotto.compilador.Helpers&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.ImportOrderCheck"/>
 <error line="12" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
 <error line="35" column="9" severity="error" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
 <error line="70" column="31" severity="error" message="Control variable &apos;i&apos; is modified." source="com.puppycrawl.tools.checkstyle.checks.coding.ModifiedControlVariableCheck"/>
@@ -80,6 +80,6 @@
 <error line="90" column="21" severity="error" message="&apos;for&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
 <error line="106" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
 </file>
-<file name="/workspaces/compiladores/src/test/java/me/josecomparotto/cbr/AppTest.java">
+<file name="/workspaces/compiladores/src/test/java/me/josecomparotto/compilador/AppTest.java">
 </file>
 </checkstyle>

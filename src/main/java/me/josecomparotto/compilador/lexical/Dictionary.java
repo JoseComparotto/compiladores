@@ -19,7 +19,6 @@ public enum Dictionary {
 
     // Palavras reservadas
     KEYWORD_KAKU("kaku"),           // Comando de saída
-    KEYWORD_YOMU("yomu"),           // Comando de entrada
     KEYWORD_MOSHI("moshi"),         // Estrutura condicional
     KEYWORD_SOREIGAI("soreigai"),   // Estrutura de negação da condição
     KEYWORD_TAMENI("tameni"),       // Estrutura de Repetição
@@ -32,10 +31,15 @@ public enum Dictionary {
     KEYWORD_MO("mo"),               // Operador "e"
     KEYWORD_MATA("mata"),           // Operador "ou"
 
+    // Chave de entrada
+    INPUT_VALUE_KEY("\\?"),
+    INPUT_LINE_KEY("\\?\\?"),
+
     // Operadores aritiméticos
+    CONCAT_OPERATOR("\\."),
     PRODUCT_OPERATOR("\\*"),
     DIV_OPERATOR("/"),
-    SUM_OPERATOR("\\+"),
+    ADD_OPERATOR("\\+"),
     SUB_OPERATOR("-"),
 
     // Operadores relacionais

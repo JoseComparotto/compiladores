@@ -5,6 +5,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import me.josecomparotto.compilador.lexical.Dictionary;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -32,6 +35,48 @@ public class Helpers {
                 unicode = "0" + unicode;
 
             s = s.replaceAll("\\u" + unicode, "\\\\u" + unicode);
+        }
+
+        return s;
+    }
+
+    public static String unquote(String s) {
+
+        Matcher m = Dictionary.TEXT_LITERAL.matcher(s);
+
+        if (m.find()) {
+            s = m.group(1);
+        }
+
+        s = s.replace("\\\\", "\\")
+                .replace("\\\b", "\b")
+                .replace("\\\t", "\t")
+                .replace("\\\n", "\n")
+                .replace("\\\f", "\f")
+                .replace("\\\r", "\r")
+                .replace("\\\'", "\'")
+                .replace("\\\"", "\"");
+
+        m = Pattern.compile("\\\\u([0-9A-Fa-f]{4})").matcher(s);
+
+        while (m.find()) {
+            String unicode = m.group();
+            String hexValue = m.group(1);
+
+            int charCode = Integer.parseInt(hexValue, 16);
+
+            s = s.replaceAll(unicode, Character.toString((char) charCode));
+        }
+
+        m = Pattern.compile("\\\\[0-7]{3}").matcher(s);
+
+        while (m.find()) {
+            String octcode = m.group();
+            String octValue = m.group(1);
+
+            int charCode = Integer.parseInt(octValue, 8);
+
+            s = s.replaceAll(octcode, Character.toString((char) charCode));
         }
 
         return s;
