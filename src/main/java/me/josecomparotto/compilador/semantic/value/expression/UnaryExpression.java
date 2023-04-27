@@ -1,13 +1,17 @@
-package me.josecomparotto.compilador.semantic.expression;
+package me.josecomparotto.compilador.semantic.value.expression;
 
 import me.josecomparotto.compilador.semantic.Context;
-import me.josecomparotto.compilador.semantic.Value;
+import me.josecomparotto.compilador.semantic.value.Value;
 
-public class UnaryExpression extends Value {
+public abstract class UnaryExpression extends Value {
 
-    private final Value value;
+    protected final Value value;
 
     public UnaryExpression(Value value) {
+        this(null, value);
+    }
+    public UnaryExpression(Context context, Value value) {
+        super(context);
         this.value = value;
     }
 
@@ -17,7 +21,7 @@ public class UnaryExpression extends Value {
 
         this.value.setContext(context);
     }
-
+    
     @Override
     public String toString() {
         return String.format("<%s>%s</%s>",
@@ -25,4 +29,5 @@ public class UnaryExpression extends Value {
                 this.value.toString(),
                 getClass().getName());
     }
+
 }

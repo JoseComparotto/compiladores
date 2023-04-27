@@ -1,21 +1,28 @@
 package me.josecomparotto.compilador.semantic;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import me.josecomparotto.compilador.semantic.instruction.Instruction;
 
-public class Context extends SemanticObject {
+public class Context extends Semantic implements Runnable {
 
-    protected final Set<String> identifiers;
     protected final List<Instruction> instructions;
+    protected final List<Context> children;
+    protected final Map<String, Object> variablesMap;
 
     public Context(Instruction... instructions) {
-        this.identifiers = new HashSet<>();
+        this(null, instructions);
+    }
+
+    public Context(Context context, Instruction... instructions) {
+        super(context);
         this.instructions = new ArrayList<>();
+        this.children = new ArrayList<>();
+        this.variablesMap = new HashMap<>();
 
         for (Instruction instruction : instructions) {
             this.addInstruction(instruction);
@@ -32,36 +39,50 @@ public class Context extends SemanticObject {
         this.instructions.add(instruction);
     }
 
-    public void addIdentifier(String identifier) {
-
-        if (this.hasIdentifier(identifier))
-            return; // TODO Lançar erro: variavel já declarada no contexto atual.
-
-        this.identifiers.add(identifier);
-    }
-
-    public boolean hasIdentifier(String identifier) {
-        return this.identifiers.contains(identifier) ||
-                getContext() != null && getContext() != this &&
-                        getContext().hasIdentifier(identifier);
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
+    public void addopt(Context child) {
+        child.setContext(this);
+        this.children.add(child);
     }
 
     @Override
     public String toString() {
+        return String.format("<Context>%s</Context>",
+                this.instructions.stream().map(v -> v.toString())
+                        .collect(Collectors.joining("")));
+    }
 
-        return String.format("<Context>%s%s</Context>",
-                String.format("<Identifiers>%s</Identifiers>",
-                        this.identifiers.stream().map(v -> v.toString())
-                                .collect(Collectors.joining(""))),
+    public void setVariable(String identifier, Object value) {
+        if(getContext() != null && getContext().hasVariable(identifier)){
+            getContext().setVariable(identifier, value);
+            return;
+        }
 
-                String.format("<Instructions>%s</Instructions>",
-                        this.instructions.stream().map(v -> v.toString())
-                                .collect(Collectors.joining(""))));
+        this.variablesMap.put(identifier, value);
+    }
+
+    public Object getVariable(String identifier) {
+        if(!this.hasVariable(identifier)){
+            return null;
+        }
+
+        if (!variablesMap.keySet().contains(identifier))
+            return getContext().getVariable(identifier);
+
+        return this.variablesMap.get(identifier);
+    }
+
+    public boolean hasVariable(String identifier) {
+        return variablesMap.keySet().contains(identifier) || 
+            getContext() != null && getContext().hasVariable(identifier);
+    }
+
+    @Override
+    public void run() {
+        variablesMap.clear();
+
+        for (Instruction instruction : this.instructions) {
+            instruction.run();
+        }
     }
 
 }

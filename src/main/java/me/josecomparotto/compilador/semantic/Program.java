@@ -1,9 +1,9 @@
 package me.josecomparotto.compilador.semantic;
 
-public class Program extends SemanticObject {
+public class Program extends Semantic implements Runnable  {
 
     public Program(Context context) {
-        this.context = context;
+        super(context);
     }
 
     @Override
@@ -11,6 +11,11 @@ public class Program extends SemanticObject {
         return String.format("<Program>%s</Program>",
             this.context.toString()
         );
+    }
+
+    @Override
+    public void run() {
+        this.context.run();
     }
 
 }

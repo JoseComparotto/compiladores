@@ -1,15 +1,16 @@
-kaku("Informe um numero natural: ");
+kaku("Informe um número natural: ");
 
 x := ?;
 
 moshi ( x < 0 ) {
-    kaku ("Numero invalido");
+    kaku ("Número inválido");
 } soreigai {
 
     resultado := 1;
     
     tameni i kara 1 made x ho 1 {
 
+        kaku (resultado * i);
         resultado := resultado * i;
 
     }

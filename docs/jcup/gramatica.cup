@@ -1,11 +1,12 @@
+
 import me.josecomparotto.compilador.semantic.*;
-import me.josecomparotto.compilador.semantic.expression.*;
+import me.josecomparotto.compilador.semantic.value.expression.*;
 import me.josecomparotto.compilador.semantic.instruction.*;
-import me.josecomparotto.compilador.semantic.literal.*;
+import me.josecomparotto.compilador.semantic.value.literal.*;
+import me.josecomparotto.compilador.semantic.value.*;
 
 terminal String
     SEMICOLON,
-    COMMA,
     KEYWORD_KAKU,
     KEYWORD_MOSHI,
     KEYWORD_SOREIGAI,
@@ -77,7 +78,7 @@ non terminal String
 program ::= context:s {:
     RESULT = new Program(s);
 
-    System.out.println(RESULT);
+    System.out.println(RESULT.getJava());
 :};
 
 /* Escopos */
@@ -227,7 +228,7 @@ aritm_unary_expression ::= primitive_value:e {: RESULT = e; :};
 
 primitive_value ::=
     const:c {: RESULT = c; :} |
-    IDENTIFIER:id {: RESULT = new Variable(id); :} |
+    IDENTIFIER:id {: RESULT = new VariableValue(id); :} |
     PARENTHESIS_OPENING value:v PARENTHESIS_CLOSURE {: RESULT = v; :} |
     input_value:v {: RESULT = v; :} |
     input_line:v {: RESULT = v; :};

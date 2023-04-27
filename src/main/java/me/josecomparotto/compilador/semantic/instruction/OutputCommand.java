@@ -1,13 +1,18 @@
 package me.josecomparotto.compilador.semantic.instruction;
 
 import me.josecomparotto.compilador.semantic.Context;
-import me.josecomparotto.compilador.semantic.Value;
+import me.josecomparotto.compilador.semantic.value.Value;
 
 public class OutputCommand extends Instruction {
 
     private final Value value;
 
     public OutputCommand(Value value) {
+        this(null, value);
+    }
+
+    public OutputCommand(Context context, Value value) {
+        super(context);
         this.value = value;
     }
 
@@ -18,7 +23,7 @@ public class OutputCommand extends Instruction {
     @Override
     public void setContext(Context context) {
         super.setContext(context);
-        value.setContext(context);
+        this.value.setContext(context);
     }
 
     @Override
@@ -28,4 +33,8 @@ public class OutputCommand extends Instruction {
         );
     }
 
+    @Override
+    public void run() {
+        System.out.println(value.getValue());
+    }
 }

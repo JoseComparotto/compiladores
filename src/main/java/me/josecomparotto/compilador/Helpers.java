@@ -108,4 +108,10 @@ public class Helpers {
         return "linha " + (line + 1) + ", coluna " + (column + 1);
     }
 
+    public static String className(Object o){
+        String[] fullClassName = o.getClass().getName().split("\\.");
+
+        return fullClassName[fullClassName.length-1];
+    }
+
 }

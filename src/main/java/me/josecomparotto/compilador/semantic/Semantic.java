@@ -1,8 +1,18 @@
 package me.josecomparotto.compilador.semantic;
 
-public abstract class SemanticObject {
+import me.josecomparotto.compilador.Helpers;
+
+public abstract class Semantic {
 
     protected Context context;
+
+    protected Semantic(){
+
+    }
+
+    protected Semantic(Context context){
+        this.context = context;
+    }
 
     public Context getContext() {
         return context;
@@ -14,6 +24,7 @@ public abstract class SemanticObject {
 
     @Override
     public String toString() {
-        return String.format("<%s/>", this.getClass().getName());
+        return String.format("<%s/>", Helpers.className(this));
     }
+    
 }

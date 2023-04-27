@@ -54,7 +54,7 @@ Exemplo 2: Código-fonte do mesmo programa escrito na linguagem **J++**.
 ```jpp
 kaku("Informe um numero natural: ");
 
-yomu(x);
+x := ?;
 
 moshi ( x < 0 ) {
     kaku ("Numero invalido");
@@ -68,20 +68,19 @@ moshi ( x < 0 ) {
 
     }
 
-    kaku (x, "! = ", resultado);
+    kaku (x . "! = " . resultado);
 
 }
 ```
 
 ### Alfabeto: Lista de caracteres aceitos
 
-Caracteres: `abcdefghijklmnopqrstuvwxyz0123456789_=:+-*/><!.,(){};" \t\n`
+Caracteres: `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_=:+-*/><!.,(){};"?`
 
-Expressão Regular: `/[a-z0-9\_\=\:\+\-\*\/\>\<\!\.\,\(\)\{\}\;\"\ \t\n]/g`
+Expressão Regular: `/[A-Za-z0-9\_\=\:\+\-\*\/\>\<\!\.\(\)\{\}\;\"\?]/g`
 
 ### Dicionário: Lista de palavras reservadas
 
-* `yomu`
 * `kaku`
 * `tameni`
 * `kara`
@@ -110,9 +109,11 @@ Expressão Regular: `/[a-z0-9\_\=\:\+\-\*\/\>\<\!\.\,\(\)\{\}\;\"\ \t\n]/g`
 * `{`
 * `}`
 * `;`
-* `,`
+* `.`
+* `?`
+* `??`
 
-### Gramática Léxica
+### Gramática
 
 #### Identificador de variaveis: `<identifier>`
 

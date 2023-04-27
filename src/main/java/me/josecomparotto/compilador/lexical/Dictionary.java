@@ -67,7 +67,7 @@ public enum Dictionary {
             Pattern.CASE_INSENSITIVE, true), // Literais de texto https://regexr.com/7a1k7
 
     // Identificador
-    IDENTIFIER("([_a-z][_a-z0-9]*)", true), // Identificador universal
+    IDENTIFIER("[_a-z][_A-Za-z0-9]*", true), // Identificador universal
 
     // Final do arquivo
     EOF("$");
