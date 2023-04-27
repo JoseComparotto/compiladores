@@ -2,9 +2,9 @@
 
 Trabalho para a disciplina de compiladores.
 
-Academico: [José A. Q. C. Gomes `<jose.augusto.comparotto@gmail.com>`](mailto:jose.augusto.comparotto@gmail.com)
+Academico: [José A. Q. C. Gomes `@JoseComparotto`](https://github.com/JoseComparotto)
 
-Professor: [Sidney Maldonado `<sidneymaldonado@gmail.com>`](mailto:sidneymaldonado@gmail.com)
+Professor: [Sidney Maldonado `@SidneyMaldonado`](https://github.com/SidneyMaldonado)
 
 Universidade: Uniderp Matriz - Campo Grande, MS
 
