@@ -6,7 +6,7 @@ import java.io.InputStream;
 import me.josecomparotto.compilador.lexical.LexicalScanner;
 import me.josecomparotto.compilador.syntax.SyntaxParser;
 
-public class ExempleSyntaxTest {
+public class ExempleCompileTest {
 
     public static void main(String[] args) {
 
@@ -22,12 +22,9 @@ public class ExempleSyntaxTest {
 
             SyntaxParser parser = new SyntaxParser(scanner);
 
-            // System.setOut(out);
-
             parser.parse();
 
             in.close();
-            // out.close();
 
         } catch (Exception e) {
             e.printStackTrace();
