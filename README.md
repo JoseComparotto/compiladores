@@ -12,6 +12,39 @@ Curso: Engenharia da Computação
 
 Perído: 2023.1 - 3º Semestre
 
+## Àrvore do Projeto
+
+```
+📦 compiladores
+├─ docs
+│  ├─ jcup
+|  |  └─ gramatica.cup  <-- Definição da gramática  
+│  └─ txt
+│     ├─ exemplo.txt    <-- Código-fonte de teste 
+│     └─ ...
+├─ src
+│  ├─ main
+│  │  └─ java
+│  │     └─ me
+│  │        └─ josecomparotto
+│  │           └─ compilador
+│  │              ├─ App.java               <-- Classe principal
+│  │              ├─ ...
+│  │              ├─ lexical
+│  │              │  ├─ Dictionary.java     <-- Definição dos tokens
+│  │              │  └─ ...
+│  │              ├─ syntax         <-- Analisador sintático gerado pelo JCup
+│  │              └─ semantic       <-- Classes de objetos semânticos
+|  | 
+│  └─ test
+│     └─ java
+│        └─ me
+│           └─ josecomparotto
+│              └─ compilador
+│                 ├─ CompileJCupGrammar.java    <-- Compila o arquivo gramaica.cup
+│                 └─ RunExempleTest.java        <-- Roda o arquivo de teste exemplo.txt
+```
+
 ## Linguagem J++ (Japan Plus Plus)
 
 O objetivo deste trabalho é desenvolver um compilador, em Java, para a linguagem "J++", que é inspirada na linguagem "C", porém em Japonês.
@@ -75,110 +108,40 @@ moshi ( x < 0 ) {
 
 ### Alfabeto: Lista de caracteres aceitos
 
-Caracteres: `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_=:+-*/><!.,(){};"?`
-
-Expressão Regular: `/[A-Za-z0-9\_\=\:\+\-\*\/\>\<\!\.\(\)\{\}\;\"\?]/g`
+Caracteres: `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_=:+-*/><!.(){};"?`
 
 ### Dicionário: Lista de palavras reservadas
 
-* `kaku`
-* `tameni`
-* `kara`
-* `made`
-* `ho`
-* `moshi`
-* `soreigai`
-* `shin`
-* `nise`
-* `mo`
-* `mata`
-* `shinai`
-* `:=`
-* `+`
-* `-`
-* `*`
-* `/`
-* `>`
-* `<`
-* `>=`
-* `<=`
-* `==`
-* `!=`
-* `(`
-* `)`
-* `{`
-* `}`
-* `;`
-* `.`
-* `?`
-* `??`
-
-### Gramática
-
-#### Identificador de variaveis: `<identifier>`
-
-`<identifier> = <letter>, { <alpha> };`
-
-#### Constantes `<const>`
-
-`<const> = <text-literal> | <number-literal> | <bool-literal>;`
-
-#### Literais Numéricos `<number-literal>`
-
-`<number-literal> = { <digit> } | { <digit> }, '.', { <digit> };`
-
-#### Literais Lógicos `<bool-literal>`
-
-`<bool-literal> = 'shin' | 'nise';`
-
-#### Literais de Texto `<text-literal>`
-
-`<text-literal> = '"', { <any> - '"' }, '"';`
-
-#### Operadores Aritiméticos Aditivos `<aritm-add-operator>`
-
-`<aritm-add-operator> = '+' | '-';`
-
-#### Operadores Aritiméticos Multiplicativos `<aritm-mult-operator>`
-
-`<aritm-mult-operator> = '*' | '/';`
-
-#### Operadores Relacionais `<rel-operator>`
-
-`<rel-operator> = '==' | '!=' | '<=' | '>=' | '<' | '>';`
-
-#### Operador Lógico de Disjunção (OU) `<logic-or-operator>`
-
-`<logic-or-operator> = 'mata';`
-
-#### Operador Lógico de Conjunção (E) `<logic-and-operator>`
-
-`<logic-and-operator> = 'mo';`
-
-#### Operador Lógico de Negação (NÃO) `<logic-not-operator>`
-
-`<logic-not-operator> = 'shinai';`
-
-#### Qualquer caractere `<any>`
-
-`<any> = <alpha> | <special> | <blank>;`
-
-#### Caracteres Alfanumérico `<alpha>`
-
-`<alpha> = <letter> | <digit>;`
-
-#### Caracteres Numérico `<digit>`
-
-`<digit> = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';`
-
-#### Caracteres de letras `<letter>`
-
-`<letter> = '_' | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z';`
-
-#### Caracteres Especiais `<special>`
-
-`<special> = '=' | ':' | '+' | '-' | '*' | '/' | '>' | '<' | '!' | '.' | ',' | '(' | ')' | '{' | '}' | ';' | '"';`
-
-#### Caracteres Invisíveis `<blank>`
-
-`<blank> = ' ' | '\n' | '\t';`
+| Valor         | Descrição                 | Função                        |
+|---------------|---------------------------|-------------------------------|
+| `kaku`        | Escreva                   | Comando de saída              |
+| `tameni`      | Para                      | Estrutura de repetição        |
+| `kara`        | De                        | Valor inicial da repetição    |
+| `made`        | Ate                       | Valor final da repeição       |
+| `ho`          | Passo                     | Salto da repetição            |
+| `moshi`       | Se                        | Estrutura condicional         |
+| `soreigai`    | Senao                     | Estrutura de negação          |
+| `shin`        | Verdadeiro                | Valor literal lógico          |
+| `nise`        | Falso                     | Valor literal lógico          |
+| `mo`          | E                         | Operador lógico               |
+| `mata`        | Ou                        | Operador lógico               |
+| `shinai`      | Nao                       | Operador lógico               |
+| `:=`          | Atribuição                | Comando                       |
+| `+`           | Adição                    | Operador aritmético           |
+| `-`           | Subtração                 | Operador aritmético           |
+| `*`           | Multiplicação             | Operador aritmético           |
+| `/`           | Divisão                   | Operador aritmético           |
+| `>`           | Maior que                 | Operador relacional           |
+| `<`           | Menor que                 | Operador relacional           |
+|`>=`           | Maior ou igual a          | Operador relacional           |
+|`<=`           | Menor ou igual a          | Operador relacional           |
+|`==`           | Igual                     | Operador relacional           |
+|`!=`           | Diferente                 | Operador relacional           |
+|`(`            | Abertura de parenteses    | Estrutura de precedência      |
+|`)`            | Fechamento de parenteses  | Estrutura de precedência      |
+|`{`            | Abertura de bloco         | Estrutura de contexto         |
+|`}`            | Fechamento de bloco       | Estrutura de contexto         |
+|`;`            | Ponto e vírgula           | Marcador de final de comando  |
+|`.`            | Ponto                     | Operador de concatenação      |
+|`?`            | Interrogação              | Entrada de valor              |
+|`??`           | Interrogação dupla        | Entrada de linha              |
