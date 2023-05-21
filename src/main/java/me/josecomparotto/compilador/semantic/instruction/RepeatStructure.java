@@ -1,5 +1,6 @@
 package me.josecomparotto.compilador.semantic.instruction;
 
+import me.josecomparotto.compilador.lexical.Token;
 import me.josecomparotto.compilador.semantic.Context;
 import me.josecomparotto.compilador.semantic.value.literal.NumberLiteral;
 import me.josecomparotto.compilador.semantic.value.Value;
@@ -11,13 +12,13 @@ import me.josecomparotto.compilador.semantic.value.expression.LessThenOrEqualsEx
 
 public class RepeatStructure extends Instruction {
 
-    private final String iterator;
+    private final Token iterator;
     private final Value from;
     private final Value to;
     private final Value step;
     private final Context loopContext;
 
-    public RepeatStructure(Context context, String iterator, Value from, Value to, Value step, Context loopContext) {
+    public RepeatStructure(Context context, Token iterator, Value from, Value to, Value step, Context loopContext) {
         super(loopContext);
         this.iterator = iterator;
         this.from = from;
@@ -26,11 +27,11 @@ public class RepeatStructure extends Instruction {
         this.loopContext = loopContext;
     }
 
-    public RepeatStructure(String iterator, Value from, Value to, Value step, Context loopContext) {
+    public RepeatStructure(Token iterator, Value from, Value to, Value step, Context loopContext) {
         this(null, iterator, from, to, step, loopContext);
     }
 
-    public RepeatStructure(Context context, String iterator, Value from, Value to, Context loopContext) {
+    public RepeatStructure(Context context, Token iterator, Value from, Value to, Context loopContext) {
         this(
                 context,
                 iterator,
@@ -40,7 +41,7 @@ public class RepeatStructure extends Instruction {
                 loopContext);
     }
 
-    public RepeatStructure(String iterator, Value from, Value to, Context loopContext) {
+    public RepeatStructure(Token iterator, Value from, Value to, Context loopContext) {
         this(null, iterator, from, to, loopContext);
     }
 

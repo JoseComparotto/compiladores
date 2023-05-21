@@ -10,11 +10,12 @@ moshi ( x < 0 ) {
     
     tameni i kara 1 made x ho 1 {
 
-        kaku (resultado * i);
+        kaku (resultado." * ".i." = ".resultado*i);
+
         resultado := resultado * i;
 
     }
 
-    kaku (x . "! = " . resultado);
+    kaku ("O fatorial de ".x." é: ".resultado);
 
 }

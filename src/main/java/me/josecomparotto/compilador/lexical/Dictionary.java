@@ -32,69 +32,59 @@ public enum Dictionary {
     KEYWORD_MATA("mata"),           // Operador "ou"
 
     // Chave de entrada
-    INPUT_VALUE_KEY("\\?"),
-    INPUT_LINE_KEY("\\?\\?"),
+    QUESTION_MARK("\\?"),
+    DOUBLE_QUESTION_MARK("\\?\\?"),
 
     // Operadores aritiméticos
-    CONCAT_OPERATOR("\\."),
-    PRODUCT_OPERATOR("\\*"),
-    DIV_OPERATOR("/"),
-    ADD_OPERATOR("\\+"),
+    PERIOD("\\."),
+    ASTERISK("\\*"),
+    SLASH("/"),
+    PLUS("\\+"),
     SUB_OPERATOR("-"),
 
     // Operadores relacionais
-    NOT_EQUALS_OPERATOR("!="),
-    EQUALS_OPERATOR("=="),
-    LESS_THEN_OR_EQUALS_OPERATOR("<="),
-    GREATER_THEN_OR_EQUALS_OPERATOR(">="),
-    GREATER_THEN_OPERATOR(">"),
-    LESS_THEN_OPERATOR("<"),
+    EXCLAMATION_EQUALS("!="),
+    DOUBLE_EQUALS("=="),
+    LESS_THEN_EQUALS("<="),
+    GREATER_THEN_EQUALS(">="),
+    GREATER_THEN(">"),
+    LESS_THEN("<"),
 
     // Operador de atribuição
-    ASSIGNMENT_OPERATOR(":="),
+    COLON_EQUALS(":="),
 
     // Delimitadores de parenteses
-    PARENTHESIS_OPENING("\\("),
-    PARENTHESIS_CLOSURE("\\)"),
+    OPEN_PARENTHESIS("\\("),
+    CLOSE_PARENTHESIS("\\)"),
 
     // Delimitadores de escopo
-    BLOCK_OPENING("\\{"),
-    BLOCK_CLOSURE("\\}"),
+    OPEN_BRACE("\\{"),
+    CLOSE_BRACE("\\}"),
 
     // Literais
-    NUMBER_LITERAL("\\d+(\\.\\d+)?(e[+-]?\\d+)?", Pattern.CASE_INSENSITIVE, true), // Literais numéricos
+    NUMBER_LITERAL("\\d+(\\.\\d+)?(e[+-]?\\d+)?", Pattern.CASE_INSENSITIVE), // Literais numéricos
     TEXT_LITERAL("\"((?:(?:\\\\(?:u[0-9a-f]{4}|[0-7]{3}|x[0-9a-f]{2}|[abfnrtv'\"?\\\\]))|[^\\\"\\n\\\\])*)\"",
-            Pattern.CASE_INSENSITIVE, true), // Literais de texto https://regexr.com/7a1k7
+            Pattern.CASE_INSENSITIVE), // Literais de texto https://regexr.com/7a1k7
 
     // Identificador
-    IDENTIFIER("[_a-z][_A-Za-z0-9]*", true), // Identificador universal
+    IDENTIFIER("[_A-Za-z][_A-Za-z0-9]*"), // Identificador universal
 
     // Final do arquivo
     EOF("$");
 
     public final Pattern pattern;
-    public final boolean keepValue;
 
-    private Dictionary(Pattern pattern, boolean keepValue) {
+    private Dictionary(Pattern pattern) {
         this.pattern = pattern;
-        this.keepValue = keepValue;
-    }
-
-    private Dictionary(String pattern, int flags, boolean keepValue) {
-        this(Pattern.compile(pattern, flags), keepValue);
-    }
-
-    private Dictionary(String pattern, boolean keepValue) {
-        this(pattern, 0, keepValue);
     }
 
     private Dictionary(String pattern, int flags) {
-        this(pattern, flags, false);
-    }
-    private Dictionary(String pattern) {
-        this(pattern, 0, false);
+        this(Pattern.compile(pattern, flags));
     }
 
+    private Dictionary(String pattern) {
+        this(pattern, 0);
+    }
 
     public Matcher matcher(CharSequence input) {
         return this.pattern.matcher(input);

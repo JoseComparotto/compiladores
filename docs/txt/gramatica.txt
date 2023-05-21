@@ -6,7 +6,7 @@
 
     As palavras reservadas estão no idioma Japonês.
 
-    A minha linguagem é fracamente tipada.
+    A linguagem é fracamente tipada.
 *)
 
 <program> = <context>;
@@ -124,7 +124,7 @@
 
 (* Constantes (literais) *)
 <const> = <text-literal> | <number-literal> | <bool-literal>;
-<number-literal> = { <digit> } | { <digit> }, '.', { <digit> };
+<number-literal> = <digit>, { <digit> } | <digit>, { <digit> }, '.', <digit>, { <digit> };
 <bool-literal> = 'shin' | 'nise'; 
 <text-literal> = '"', { <any> - '"' }, '"';
 

@@ -29,7 +29,7 @@ public class LexicalScanner implements java_cup.runtime.Scanner, Iterable<Token>
     @Override
     public Symbol next_token() throws Exception {
         if(tokens.size() > 0) 
-            return tokens.remove(0);    
+            return tokens.remove(0).getSymbol();    
         else
             return new Symbol(0);
         

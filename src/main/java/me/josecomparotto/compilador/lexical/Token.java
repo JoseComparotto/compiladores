@@ -3,7 +3,7 @@ package me.josecomparotto.compilador.lexical;
 import java_cup.runtime.Symbol;
 import me.josecomparotto.compilador.Helpers;
 
-public class Token extends Symbol{
+public class Token {
 
     public final Dictionary symbol;
     public final String value;
@@ -12,8 +12,6 @@ public class Token extends Symbol{
     public final int length;
 
     public Token(Dictionary symbol, String value, int start, int end) {
-        super(symbol.getId(), value);
-
         this.symbol = symbol;
         this.value = value;
         this.start = start;
@@ -23,11 +21,11 @@ public class Token extends Symbol{
 
     @Override
     public String toString() {
-        if (this.symbol.keepValue)
-            return "<" + this.symbol.name() + ", '" + Helpers.escape(this.value) + "'>";
-        else
-            return "<" + this.symbol.name() + ">";
+        return "<" + this.symbol.name() + ", '" + Helpers.escape(this.value) + "'>";
+    }
 
+    public Symbol getSymbol() {
+        return new Symbol(symbol.getId(), start, end, this);
     }
 
 }

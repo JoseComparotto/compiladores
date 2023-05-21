@@ -6,7 +6,7 @@ import java.io.InputStream;
 import me.josecomparotto.compilador.lexical.LexicalScanner;
 import me.josecomparotto.compilador.syntax.SyntaxParser;
 
-public class ExempleCompileTest {
+public class RunExempleTest {
 
     public static void main(String[] args) {
 

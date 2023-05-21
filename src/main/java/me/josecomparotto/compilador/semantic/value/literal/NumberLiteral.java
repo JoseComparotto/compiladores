@@ -1,5 +1,6 @@
 package me.josecomparotto.compilador.semantic.value.literal;
 
+import me.josecomparotto.compilador.lexical.Token;
 import me.josecomparotto.compilador.semantic.Context;
 import me.josecomparotto.compilador.semantic.value.Value;
 
@@ -7,11 +8,11 @@ public class NumberLiteral extends Value {
 
     private final Number value;
 
-    public NumberLiteral(Context context, String string) {
-        this(context, Double.parseDouble(string));
+    public NumberLiteral(Context context, Token string) {
+        this(context, Double.parseDouble(string.value));
     }
 
-    public NumberLiteral(String value) {
+    public NumberLiteral(Token value) {
         this(null, value);
     }
 
