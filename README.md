@@ -8,7 +8,7 @@ Professor: [Sidney Maldonado `@SidneyMaldonado`](https://github.com/SidneyMaldon
 
 Universidade: Uniderp Matriz - Campo Grande, MS
 
-Curso: Engenharia da Computação
+Curso: Engenharia da Computação - Noturno
 
 Perído: 2023.1 - 3º Semestre
 
